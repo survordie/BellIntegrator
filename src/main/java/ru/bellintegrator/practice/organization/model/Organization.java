@@ -3,7 +3,7 @@ package ru.bellintegrator.practice.organization.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Organization")
+@Table(name = "organization")
 public class Organization {
 
     @Id
@@ -16,6 +16,9 @@ public class Organization {
      */
     @Version
     private Integer version;
+
+    @Column(name = "country_id", nullable = false)
+    private Long countryId;
 
     /**
      * Имя
@@ -59,6 +62,9 @@ public class Organization {
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
+    /**
+     * Конструктор для hibernate
+     */
     public Organization(){
 
     }
@@ -71,5 +77,69 @@ public class Organization {
         this.address = address;
         this.phone = phone;
         this.isActive = isActive;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getInn() {
+        return inn;
+    }
+
+    public void setInn(String inn) {
+        this.inn = inn;
+    }
+
+    public String getKpp() {
+        return kpp;
+    }
+
+    public void setKpp(String kpp) {
+        this.kpp = kpp;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public Long getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(Long countryId) {
+        this.countryId = countryId;
     }
 }

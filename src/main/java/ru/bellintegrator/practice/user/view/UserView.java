@@ -10,9 +10,6 @@ public class UserView {
     public String middleName;
     public int position;
     public String phone;
-    public String docName;
-    public String docNumber;
-    public Date docDate;
     public String citizenshipName;
     public int citizenshipCode;
     public boolean isIdentified;

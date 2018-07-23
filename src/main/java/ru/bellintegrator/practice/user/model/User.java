@@ -1,10 +1,9 @@
 package ru.bellintegrator.practice.user.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -17,6 +16,24 @@ public class User {
      */
     @Version
     private Integer version;
+
+    /**
+     * Идентификатор офиса
+     */
+    @Column(name = "office_id", nullable = false)
+    private Long officeId;
+
+    /**
+     * Идентификатор типа документа
+     */
+    @Column(name = "doc_type_id", nullable = false)
+    private Long docTypeId;
+
+    /**
+     * Идентификатор документа
+     */
+    @Column(name = "doc_id", nullable = false)
+    private Long docId;
 
     /**
      * Имя
@@ -48,23 +65,6 @@ public class User {
     @Column(name = "phone", length = 20)
     private String phone;
 
-    /**
-     * Имя документа
-     */
-    @Column(name = "doc_name", length = 50)
-    private String docName;
-
-    /**
-     * Номер документа
-     */
-    @Column(name = "doc_number", length = 50)
-    private String docNumber;
-
-    /**
-     * Дата документа
-     */
-    @Column(name = "doc_date")
-    private Date docDate;
 
     /**
      * Имя гражданина
@@ -91,15 +91,12 @@ public class User {
 
     }
 
-    public User(String firstName, String secondName, String middleName, int position, String phone, String docName, String docNumber, Date docDate, String citizenshipName, int citizenshipCode, boolean isIdentified) {
+    public User(String firstName, String secondName, String middleName, int position, String phone, String citizenshipName, int citizenshipCode, boolean isIdentified) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;
         this.position = position;
         this.phone = phone;
-        this.docName = docName;
-        this.docNumber = docNumber;
-        this.docDate = docDate;
         this.citizenshipName = citizenshipName;
         this.citizenshipCode = citizenshipCode;
         this.isIdentified = isIdentified;
@@ -149,30 +146,6 @@ public class User {
         this.phone = phone;
     }
 
-    public String getDocName() {
-        return docName;
-    }
-
-    public void setDocName(String docName) {
-        this.docName = docName;
-    }
-
-    public String getDocNumber() {
-        return docNumber;
-    }
-
-    public void setDocNumber(String docNumber) {
-        this.docNumber = docNumber;
-    }
-
-    public Date getDocDate() {
-        return docDate;
-    }
-
-    public void setDocDate(Date docDate) {
-        this.docDate = docDate;
-    }
-
     public String getCitizenshipName() {
         return citizenshipName;
     }
@@ -195,5 +168,29 @@ public class User {
 
     public void setIdentified(boolean identified) {
         isIdentified = identified;
+    }
+
+    public Long getOfficeId() {
+        return officeId;
+    }
+
+    public void setOfficeId(Long officeId) {
+        this.officeId = officeId;
+    }
+
+    public Long getDocTypeId() {
+        return docTypeId;
+    }
+
+    public void setDocTypeId(Long docTypeId) {
+        this.docTypeId = docTypeId;
+    }
+
+    public Long getDocId() {
+        return docId;
+    }
+
+    public void setDocId(Long docId) {
+        this.docId = docId;
     }
 }

@@ -91,8 +91,7 @@ public class User {
 
     }
 
-    public User(Long id, String firstName, String secondName, String middleName, int position, String phone, String docName, String docNumber, Date docDate, String citizenshipName, int citizenshipCode, boolean isIdentified) {
-        this.id = id;
+    public User(String firstName, String secondName, String middleName, int position, String phone, String docName, String docNumber, Date docDate, String citizenshipName, int citizenshipCode, boolean isIdentified) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;

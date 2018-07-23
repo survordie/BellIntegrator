@@ -54,11 +54,6 @@ CREATE TABLE IF NOT EXISTS Organization_Office (
 	office_id		INTEGER NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Organization_User(	
-	organization_id	INTEGER NOT NULL,
-	user_id	INTEGER NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS Office_User(	
 	office_id	INTEGER NOT NULL,
 	user_id		INTEGER NOT NULL

@@ -58,4 +58,18 @@ public class Organization {
      */
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
+
+    public Organization(){
+
+    }
+
+    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
+        this.name = name;
+        this.fullName = fullName;
+        this.inn = inn;
+        this.kpp = kpp;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
 }

@@ -1,6 +1,11 @@
 package ru.bellintegrator.practice.organization.model;
 
+import org.hibernate.mapping.FetchProfile;
+import ru.bellintegrator.practice.country.model.Country;
+import ru.bellintegrator.practice.office.model.Office;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "organization")
@@ -17,8 +22,12 @@ public class Organization {
     @Version
     private Integer version;
 
-    @Column(name = "country_id", nullable = false)
-    private Long countryId;
+    /**
+     * Страна
+     */
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "code")
+    private Country countryId;
 
     /**
      * Имя
@@ -45,7 +54,7 @@ public class Organization {
     private String kpp;
 
     /**
-     * Адресс
+     * Адрес
      */
     @Column(name = "address", length = 200, nullable = false)
     private String address;
@@ -61,6 +70,9 @@ public class Organization {
      */
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
+
+    @OneToMany(mappedBy = "organization_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Office> offices;
 
     /**
      * Конструктор для hibernate
@@ -135,11 +147,25 @@ public class Organization {
         isActive = active;
     }
 
-    public Long getCountryId() {
+    public Country getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(Long countryId) {
+    public void setCountryId(Country countryId) {
         this.countryId = countryId;
+    }
+
+    public List<Office> getOffices() {
+        return offices;
+    }
+
+    public void addOffice(Office office) {
+        getOffices().add(office);
+        office.setOrganizationId(this);
+    }
+
+    public void removeOffice(Office office){
+        getOffices().remove(office);
+        office.setOrganizationId(null);
     }
 }

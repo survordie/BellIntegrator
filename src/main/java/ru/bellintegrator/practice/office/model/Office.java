@@ -1,6 +1,10 @@
 package ru.bellintegrator.practice.office.model;
 
+import ru.bellintegrator.practice.organization.model.Organization;
+import ru.bellintegrator.practice.user.model.User;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "office")
@@ -20,8 +24,15 @@ public class Office {
     /**
      * Идентификатор организации
      */
-    @Column(name = "organization_id", nullable = false)
-    private Long organizationId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private Organization organizationId;
+
+    /**
+     * Список юзеров
+     */
+    @OneToMany(mappedBy = "office_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<User> users;
 
     /**
      * Имя офиса
@@ -93,11 +104,25 @@ public class Office {
         this.isActive = isActive;
     }
 
-    public Long getOrganizationId() {
+    public Organization getOrganizationId() {
         return organizationId;
     }
 
-    public void setOrganizationId(Long organizationId) {
+    public void setOrganizationId(Organization organizationId) {
         this.organizationId = organizationId;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void addUser(User user) {
+        getUsers().add(user);
+        user.setOfficeId(this);
+    }
+
+    public void removeUser(User user){
+        getUsers().remove(user);
+        user.setOfficeId(null);
     }
 }

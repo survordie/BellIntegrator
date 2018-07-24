@@ -1,6 +1,9 @@
-package ru.bellintegrator.practice.doc_type;
+package ru.bellintegrator.practice.country.model;
+
+import ru.bellintegrator.practice.organization.model.Organization;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "country")
@@ -30,6 +33,12 @@ public class Country {
     private String code;
 
     /**
+     * Список организаций в стране
+     */
+    @OneToMany(mappedBy = "country_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Organization> organization;
+
+    /**
      * Конструктор для hibernate
      */
     public Country(){
@@ -55,5 +64,19 @@ public class Country {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public List<Organization> getOrganization() {
+        return organization;
+    }
+
+    public void addOrganization(Organization organization) {
+        getOrganization().add(organization);
+        organization.setCountryId(this);
+    }
+
+    public void removeOrganization(Organization organization){
+        getOrganization().remove(organization);
+        organization.setCountryId(null);
     }
 }

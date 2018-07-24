@@ -1,5 +1,7 @@
 package ru.bellintegrator.practice.doc.model;
 
+import ru.bellintegrator.practice.user.model.User;
+
 import javax.persistence.*;
 import java.util.Date;
 

@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS user (
 CREATE TABLE IF NOT EXISTS organization (
 	id          INTEGER  PRIMARY KEY AUTO_INCREMENT,
 	version     INTEGER NOT NULL,
-	country_id  INTEGER NOT NULL,
+	country_id  VARCHAR(50),
 	name		VARCHAR(50) NOT NULL,
 	full_name	VARCHAR(50) NOT NULL,
 	inn			VARCHAR(12) NOT NULL,
@@ -57,5 +57,5 @@ CREATE TABLE IF NOT EXISTS country(
     id          INTEGER  PRIMARY KEY AUTO_INCREMENT,
     version     INTEGER NOT NULL,
     name        VARCHAR(100),
-    code        VARCHAR(50) NOT NULL
+    code        VARCHAR(50) PRIMARY KEY
 );

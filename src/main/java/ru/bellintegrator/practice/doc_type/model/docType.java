@@ -1,6 +1,9 @@
 package ru.bellintegrator.practice.doc_type.model;
 
+import ru.bellintegrator.practice.user.model.User;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "doc_type")
@@ -30,6 +33,12 @@ public class DocType {
     private String name;
 
     /**
+     * Список пользователей
+     */
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<User> users;
+
+    /**
      * Конструктор для hibernate
      */
     public DocType(){
@@ -55,5 +64,19 @@ public class DocType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void addUser(User user) {
+        getUsers().add(user);
+        user.setDocTypeId(this);
+    }
+
+    public void removeUser(User user){
+        getUsers().remove(user);
+        user.setDocTypeId(null);
     }
 }

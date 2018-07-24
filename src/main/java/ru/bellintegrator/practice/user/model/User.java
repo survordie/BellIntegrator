@@ -1,6 +1,11 @@
 package ru.bellintegrator.practice.user.model;
 
+import ru.bellintegrator.practice.doc.model.Doc;
+import ru.bellintegrator.practice.doc_type.model.DocType;
+import ru.bellintegrator.practice.office.model.Office;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -20,20 +25,22 @@ public class User {
     /**
      * Идентификатор офиса
      */
-    @Column(name = "office_id", nullable = false)
-    private Long officeId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private Office officeId;
 
     /**
      * Идентификатор типа документа
      */
-    @Column(name = "doc_type_id", nullable = false)
-    private Long docTypeId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "code")
+    private DocType docTypeId;
 
     /**
      * Идентификатор документа
      */
-    @Column(name = "doc_id", nullable = false)
-    private Long docId;
+    @OneToOne(mappedBy = "doc_code", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Doc docId;
 
     /**
      * Имя
@@ -170,27 +177,27 @@ public class User {
         isIdentified = identified;
     }
 
-    public Long getOfficeId() {
+    public Office getOfficeId() {
         return officeId;
     }
 
-    public void setOfficeId(Long officeId) {
+    public void setOfficeId(Office officeId) {
         this.officeId = officeId;
     }
 
-    public Long getDocTypeId() {
+    public DocType getDocTypeId() {
         return docTypeId;
     }
 
-    public void setDocTypeId(Long docTypeId) {
+    public void setDocTypeId(DocType docTypeId) {
         this.docTypeId = docTypeId;
     }
 
-    public Long getDocId() {
+    public Doc getDocId() {
         return docId;
     }
 
-    public void setDocId(Long docId) {
+    public void setDocId(Doc docId) {
         this.docId = docId;
     }
 }

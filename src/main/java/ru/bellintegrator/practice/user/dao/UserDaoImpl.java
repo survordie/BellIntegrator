@@ -23,4 +23,24 @@ public class UserDaoImpl implements UserDao{
 	public UserDaoImpl(EntityManager em){
 		this.em = em;
 	}
+
+	@Override
+	public List<User> all() {
+		return null;
+	}
+
+	@Override
+	public User getUserById(Long id) {
+		return null;
+	}
+
+	@Override
+	public void updateUser(User user) {
+
+	}
+
+	@Override
+	public void saveUser(User user) {
+
+	}
 }

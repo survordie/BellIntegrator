@@ -39,7 +39,8 @@ public class User {
     /**
      * Идентификатор документа
      */
-    @OneToOne(mappedBy = "doc_code", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "doc_number")
     private Doc docId;
 
     /**

@@ -31,7 +31,7 @@ public class Office {
     /**
      * Список юзеров
      */
-    @OneToMany(mappedBy = "office_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "officeId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<User> users;
 
     /**

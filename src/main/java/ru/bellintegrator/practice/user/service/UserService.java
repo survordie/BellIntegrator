@@ -1,9 +1,10 @@
 package ru.bellintegrator.practice.user.service;
 
+import ru.bellintegrator.practice.user.view.UserListView;
 import ru.bellintegrator.practice.user.view.UserView;
 
 /**
- * Сервис
+ * Сервис User
  */
 public interface UserService {
 
@@ -12,7 +13,6 @@ public interface UserService {
  *
  * @return user
  */
-UserView getUserById(long id, UserView userview){
-
-}
+UserView getUserById(long id, UserView userview);
+UserListView getUserList(UserListView ulw);
 }

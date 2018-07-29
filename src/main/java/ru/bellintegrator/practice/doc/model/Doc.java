@@ -34,7 +34,7 @@ public class Doc {
     /**
      * Номер документа
      */
-    @Column(name = "doc_number", length = 50)
+    @Column(name = "doc_number")
     private String docNumber;
 
     /**

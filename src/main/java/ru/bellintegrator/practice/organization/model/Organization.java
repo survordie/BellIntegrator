@@ -71,7 +71,7 @@ public class Organization {
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
-    @OneToMany(mappedBy = "organization_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "organizationId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Office> offices;
 
     /**

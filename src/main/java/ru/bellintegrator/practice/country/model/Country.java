@@ -35,7 +35,7 @@ public class Country {
     /**
      * Список организаций в стране
      */
-    @OneToMany(mappedBy = "country_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "countryId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Organization> organization;
 
     /**

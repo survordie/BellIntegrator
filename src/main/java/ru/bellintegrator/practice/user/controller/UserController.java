@@ -1,11 +1,7 @@
 package ru.bellintegrator.practice.user.controller;
 
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.bellintegrator.practice.user.service.UserService;
 import ru.bellintegrator.practice.user.view.UserListView;
 import ru.bellintegrator.practice.user.view.UserView;
@@ -21,12 +17,27 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
-   /* @GetMapping(value = "/list")
-    public List<UserListView> getUserList(@RequestBody UserListView ulw){
+    @GetMapping(value = "/list")
+    public List<UserListView> getUserList(@RequestBody UserListView ulw) {
         return userService.getUserList(ulw);
-    }*/
+    }
+
+    @GetMapping(value = "/{id}")
+    public UserView getUserById(@PathVariable long id) {
+        return userService.getUserById(id);
+    }
+
+    @GetMapping(value = "/update")
+    public String updateUser(UserView user){
+        return userService.updateUser(user);
+    }
+
+    @GetMapping(value = "/save")
+    public void saveUser(UserView user){
+        userService.saveUser(user);
+    }
 }

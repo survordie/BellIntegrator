@@ -1,10 +1,7 @@
 package ru.bellintegrator.practice.office.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.bellintegrator.practice.office.view.OfficeView;
 
 import java.util.Set;
@@ -18,7 +15,7 @@ public class OfficeController {
     private final OfficeService officeService;
 
     @Autowired
-    public OfficeController(OfficeService officeService) {
+    public OfficeController(@RequestBody OfficeService officeService) {
         this.officeService = officeService;
     }
 
@@ -33,12 +30,12 @@ public class OfficeController {
     }
 
     @GetMapping(value = "/update")
-    public String updateOffice(OfficeView view){
+    public String updateOffice(@RequestBody OfficeView view){
         return officeService.updateOffice(view);
     }
 
     @GetMapping(value = "/save")
-    public String saveOffice(OfficeView view){
+    public String saveOffice(@RequestBody OfficeView view){
         return officeService.saveOffice(view);
     }
 }

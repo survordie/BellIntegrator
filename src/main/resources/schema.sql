@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS user (
 	version    			INTEGER NOT NULL,
 	office_id           INTEGER NOT NULL,
 	doc_type_id         INTEGER NOT NULL,
-	doc_id              VARCHAR(50) NOT NULL,
+	doc_id              VARCHAR(3) NOT NULL,
 	first_name 			VARCHAR(50) NOT NULL,
 	second_name			VARCHAR(50),
 	middle_name			VARCHAR(50),
@@ -47,8 +47,6 @@ CREATE TABLE IF NOT EXISTS doc_type (
 CREATE TABLE IF NOT EXISTS doc (
 	id          INTEGER  PRIMARY KEY AUTO_INCREMENT,
 	version     INTEGER NOT NULL,
-	doc_code    VARCHAR(50),
-    doc_name	VARCHAR(50),
     doc_number	VARCHAR(50),
     doc_date	DATE
 );
@@ -57,5 +55,5 @@ CREATE TABLE IF NOT EXISTS country (
     id          INTEGER  PRIMARY KEY AUTO_INCREMENT,
     version     INTEGER NOT NULL,
     name        VARCHAR(100),
-    code        VARCHAR(50) NOT NULL
+    code        VARCHAR(3) NOT NULL
 );

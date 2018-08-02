@@ -1,10 +1,7 @@
 package ru.bellintegrator.practice.organization.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.bellintegrator.practice.organization.view.OrganizationListView;
 import ru.bellintegrator.practice.organization.view.OrganizationView;
 
@@ -22,7 +19,7 @@ public class OrganizationController {
     }
 
     @GetMapping(value = "/list")
-    public Set<OrganizationListView> getOrganizations(OrganizationListView orgView){
+    public Set<OrganizationListView> getOrganizations(@RequestBody OrganizationListView orgView){
         return organizationService.getOrganizations(orgView);
     }
 
@@ -32,12 +29,12 @@ public class OrganizationController {
     }
 
     @GetMapping(value = "update")
-    public String updateOrganization (OrganizationView orgView){
+    public String updateOrganization (@RequestBody OrganizationView orgView){
         return organizationService.updateOrganization(orgView);
     }
 
     @GetMapping(value = "save")
-    public String saveOrganization (OrganizationView orgView){
+    public String saveOrganization (@RequestBody OrganizationView orgView){
         return organizationService.saveOrganization(orgView);
     }
 }

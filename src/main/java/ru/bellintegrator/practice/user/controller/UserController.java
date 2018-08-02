@@ -32,12 +32,12 @@ public class UserController {
     }
 
     @GetMapping(value = "/update")
-    public String updateUser(UserView user){
+    public String updateUser(@RequestBody UserView user){
         return userService.updateUser(user);
     }
 
     @GetMapping(value = "/save")
-    public void saveUser(UserView user){
+    public void saveUser(@RequestBody UserView user){
         userService.saveUser(user);
     }
 }

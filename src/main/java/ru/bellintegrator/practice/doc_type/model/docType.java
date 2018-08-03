@@ -1,5 +1,6 @@
 package ru.bellintegrator.practice.doc_type.model;
 
+import ru.bellintegrator.practice.doc.model.Doc;
 import ru.bellintegrator.practice.user.model.User;
 
 import javax.persistence.*;
@@ -23,8 +24,8 @@ public class DocType {
     /**
      * Код документа
      */
-    @Column(name = "code", length = 50)
-    private String code;
+    @OneToOne(mappedBy = "docCode", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Doc doc;
 
     /**
      * Имя документа
@@ -33,29 +34,27 @@ public class DocType {
     private String name;
 
     /**
-     * Список пользователей
-     */
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<User> users;
-
-    /**
      * Конструктор для hibernate
      */
     public DocType(){
 
     }
 
-    public DocType(String code, String name) {
-        this.code = code;
+    public DocType(Doc doc, String name) {
+        this.doc = doc;
         this.name = name;
     }
 
-    public String getCode() {
-        return code;
+    public Long getId() {
+        return id;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public Doc getDoc() {
+        return doc;
+    }
+
+    public void setDoc(Doc doc) {
+        this.doc = doc;
     }
 
     public String getName() {
@@ -64,19 +63,5 @@ public class DocType {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void addUser(User user) {
-        getUsers().add(user);
-        user.setDocTypeId(this);
-    }
-
-    public void removeUser(User user){
-        getUsers().remove(user);
-        user.setDocTypeId(null);
     }
 }

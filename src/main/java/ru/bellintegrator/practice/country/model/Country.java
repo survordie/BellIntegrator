@@ -33,12 +33,6 @@ public class Country {
     private String code;
 
     /**
-     * Список организаций в стране
-     */
-    @OneToMany(mappedBy = "countryId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Organization> organization;
-
-    /**
      * Конструктор для hibernate
      */
     public Country(){
@@ -48,6 +42,10 @@ public class Country {
     public Country(String name, String code) {
         this.name = name;
         this.code = code;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -64,19 +62,5 @@ public class Country {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public List<Organization> getOrganization() {
-        return organization;
-    }
-
-    public void addOrganization(Organization organization) {
-        getOrganization().add(organization);
-        organization.setCountryId(this);
-    }
-
-    public void removeOrganization(Organization organization){
-        getOrganization().remove(organization);
-        organization.setCountryId(null);
     }
 }

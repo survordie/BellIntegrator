@@ -5,7 +5,9 @@ import ru.bellintegrator.practice.doc_type.model.DocType;
 import ru.bellintegrator.practice.office.model.Office;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -26,22 +28,15 @@ public class User {
      * Идентификатор офиса
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "office_id")
     private Office officeId;
-
-    /**
-     * Идентификатор типа документа
-     */
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "code")
-    private DocType docTypeId;
 
     /**
      * Идентификатор документа
      */
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "doc_number")
-    private Doc docId;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "doc_id")
+    private Set<Doc> docId;
 
     /**
      * Имя
@@ -99,7 +94,9 @@ public class User {
 
     }
 
-    public User(String firstName, String secondName, String middleName, int position, String phone, String citizenshipName, int citizenshipCode, boolean isIdentified) {
+    public User(Office officeId, Set<Doc> docId, String firstName, String secondName, String middleName, int position, String phone, String citizenshipName, int citizenshipCode, boolean isIdentified) {
+        this.officeId = officeId;
+        this.docId = docId;
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;
@@ -112,6 +109,29 @@ public class User {
 
     public Long getId() {
         return id;
+    }
+
+    public Office getOfficeId() {
+        return officeId;
+    }
+
+    public void setOfficeId(Office officeId) {
+        this.officeId = officeId;
+    }
+
+    public Set<Doc> getDocId() {
+        if(docId != null){
+            docId = new HashSet<>();
+        }
+        return docId;
+    }
+
+    public void addDocId(Doc docId) {
+        getDocId().add(docId);
+    }
+
+    public void removeDocId(Doc docId){
+        getDocId().remove(docId);
     }
 
     public String getFirstName() {
@@ -176,29 +196,5 @@ public class User {
 
     public void setIdentified(boolean identified) {
         isIdentified = identified;
-    }
-
-    public Office getOfficeId() {
-        return officeId;
-    }
-
-    public void setOfficeId(Office officeId) {
-        this.officeId = officeId;
-    }
-
-    public DocType getDocTypeId() {
-        return docTypeId;
-    }
-
-    public void setDocTypeId(DocType docTypeId) {
-        this.docTypeId = docTypeId;
-    }
-
-    public Doc getDocId() {
-        return docId;
-    }
-
-    public void setDocId(Doc docId) {
-        this.docId = docId;
     }
 }

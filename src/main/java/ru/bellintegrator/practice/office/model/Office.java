@@ -25,14 +25,8 @@ public class Office {
      * Идентификатор организации
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "organization_id")
     private Organization organizationId;
-
-    /**
-     * Список юзеров
-     */
-    @OneToMany(mappedBy = "officeId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<User> users;
 
     /**
      * Имя офиса
@@ -65,11 +59,24 @@ public class Office {
 
     }
 
-    public Office(String name, String address, String phone, String isActive) {
+    public Office(Organization organizationId, String name, String address, String phone, String isActive) {
+        this.organizationId = organizationId;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.isActive = isActive;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Organization getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(Organization organizationId) {
+        this.organizationId = organizationId;
     }
 
     public String getName() {
@@ -102,27 +109,5 @@ public class Office {
 
     public void setIsActive(String isActive) {
         this.isActive = isActive;
-    }
-
-    public Organization getOrganizationId() {
-        return organizationId;
-    }
-
-    public void setOrganizationId(Organization organizationId) {
-        this.organizationId = organizationId;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void addUser(User user) {
-        getUsers().add(user);
-        user.setOfficeId(this);
-    }
-
-    public void removeUser(User user){
-        getUsers().remove(user);
-        user.setOfficeId(null);
     }
 }

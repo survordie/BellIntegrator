@@ -1,5 +1,6 @@
 package ru.bellintegrator.practice.doc.model;
 
+import ru.bellintegrator.practice.doc_type.model.DocType;
 import ru.bellintegrator.practice.user.model.User;
 
 import javax.persistence.*;
@@ -20,16 +21,11 @@ public class Doc {
     private Integer version;
 
     /**
-     * Код документа
+     * Код типа документа
      */
-    @Column(name = "doc_code", length = 50)
-    private String docCode;
-
-    /**
-     * Имя документа
-     */
-    @Column(name = "doc_name", length = 50)
-    private String docName;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doc_type_id")
+    private DocType docCode;
 
     /**
      * Номер документа
@@ -50,27 +46,22 @@ public class Doc {
 
     }
 
-    public Doc(String docCode, String docName, String docNumber, Date docDate) {
+    public Doc(DocType docCode, String docNumber, Date docDate) {
         this.docCode = docCode;
-        this.docName = docName;
         this.docNumber = docNumber;
         this.docDate = docDate;
     }
 
-    public String getDocCode() {
+    public Long getId() {
+        return id;
+    }
+
+    public DocType getDocCode() {
         return docCode;
     }
 
-    public void setDocCode(String docCode) {
+    public void setDocCode(DocType docCode) {
         this.docCode = docCode;
-    }
-
-    public String getDocName() {
-        return docName;
-    }
-
-    public void setDocName(String docName) {
-        this.docName = docName;
     }
 
     public String getDocNumber() {

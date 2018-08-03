@@ -1,11 +1,8 @@
 package ru.bellintegrator.practice.organization.model;
 
-import org.hibernate.mapping.FetchProfile;
 import ru.bellintegrator.practice.country.model.Country;
-import ru.bellintegrator.practice.office.model.Office;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "organization")
@@ -26,7 +23,7 @@ public class Organization {
      * Страна
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "code")
+    @JoinColumn(name = "country_id", nullable = false)
     private Country countryId;
 
     /**
@@ -71,17 +68,15 @@ public class Organization {
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
-    @OneToMany(mappedBy = "organizationId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Office> offices;
-
     /**
      * Конструктор для hibernate
      */
-    public Organization(){
+    public Organization() {
 
     }
 
-    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
+    public Organization(Country countryId, String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
+        this.countryId = countryId;
         this.name = name;
         this.fullName = fullName;
         this.inn = inn;
@@ -89,6 +84,18 @@ public class Organization {
         this.address = address;
         this.phone = phone;
         this.isActive = isActive;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Country getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(Country countryId) {
+        this.countryId = countryId;
     }
 
     public String getName() {
@@ -145,27 +152,5 @@ public class Organization {
 
     public void setActive(boolean active) {
         isActive = active;
-    }
-
-    public Country getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(Country countryId) {
-        this.countryId = countryId;
-    }
-
-    public List<Office> getOffices() {
-        return offices;
-    }
-
-    public void addOffice(Office office) {
-        getOffices().add(office);
-        office.setOrganizationId(this);
-    }
-
-    public void removeOffice(Office office){
-        getOffices().remove(office);
-        office.setOrganizationId(null);
     }
 }

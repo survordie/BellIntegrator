@@ -12,7 +12,17 @@ public class OrganizationView {
     public boolean isActive;
 
     @Override
-    public String toString(){
-        return "{id:" + id + " name:" + name + " country Id:" + countryId + "}";
+    public String toString() {
+        return "OrganizationView{" +
+                "id=" + id +
+                ", countryId='" + countryId + '\'' +
+                ", name='" + name + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", inn='" + inn + '\'' +
+                ", kpp='" + kpp + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isActive=" + isActive +
+                '}';
     }
 }

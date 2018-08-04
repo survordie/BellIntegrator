@@ -75,8 +75,7 @@ public class Organization {
 
     }
 
-    public Organization(Country countryId, String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
-        this.countryId = countryId;
+    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
         this.name = name;
         this.fullName = fullName;
         this.inn = inn;

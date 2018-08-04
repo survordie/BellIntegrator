@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "doc")
+@Table(name = "Doc")
 public class Doc {
     @Id
     @GeneratedValue

@@ -17,7 +17,19 @@ public class UserView {
 
     @Override
     public String toString() {
-        return "{id:" + id + " last name:" + secondName + " name:" + firstName + "}";
+        return "UserView{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", position=" + position +
+                ", officeId=" + officeId +
+                ", docTypeId=" + docTypeId +
+                ", docId=" + docId +
+                ", phone='" + phone + '\'' +
+                ", citizenshipName='" + citizenshipName + '\'' +
+                ", citizenshipCode=" + citizenshipCode +
+                ", isIdentified=" + isIdentified +
+                '}';
     }
-
 }

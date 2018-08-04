@@ -11,6 +11,14 @@ public class UserListView {
 
     @Override
     public String toString() {
-        return "{id:" + offiseId + " last name:" + secondName + " name:" + firstName + "}";
+        return "UserListView{" +
+                "offiseId=" + offiseId +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", position=" + position +
+                ", docCode=" + docCode +
+                ", citizenshipCode=" + citizenshipCode +
+                '}';
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.bellintegrator.practice.doc_type.service.DocTypeService;
 import ru.bellintegrator.practice.doc_type.view.DocTypeView;
 
 import java.util.Set;
@@ -22,6 +23,6 @@ public class DocTypeController {
 
     @GetMapping(value = "/docs")
     public Set<DocTypeView> getDocs(){
-        return dtService.getDocs();
+        return dtService.getDocTypes();
     }
 }

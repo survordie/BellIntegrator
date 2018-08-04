@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "User")
 public class User {
 
     @Id
@@ -27,15 +27,15 @@ public class User {
     /**
      * Идентификатор офиса
      */
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "office_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "office_id", nullable = false)
     private Office officeId;
 
     /**
      * Идентификатор документа
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "doc_id")
+    @JoinColumn(name = "doc_id", nullable = false)
     private Set<Doc> docId;
 
     /**

@@ -7,7 +7,12 @@ public class OrganizationListView {
     public boolean isActive;
 
     @Override
-    public String toString(){
-        return "{id:" + id + " name:" + name + "}";
+    public String toString() {
+        return "OrganizationListView{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", inn='" + inn + '\'' +
+                ", isActive=" + isActive +
+                '}';
     }
 }

@@ -2,8 +2,10 @@ package ru.bellintegrator.practice.office.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.bellintegrator.practice.office.service.OfficeService;
 import ru.bellintegrator.practice.office.view.OfficeView;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -20,13 +22,13 @@ public class OfficeController {
     }
 
     @GetMapping(value = "/list")
-    public Set<OfficeView> getOffices(){
+    public List<OfficeView> getOffices(){
         return  officeService.getOffices();
     }
 
     @GetMapping(value = "/{id}")
-    public OfficeView getOfficeById(@PathVariable long id){
-        return officeService.getOfficeById();
+    public OfficeView getOfficeById(@RequestBody OfficeView view){
+        return officeService.getOfficeById(view);
     }
 
     @GetMapping(value = "/update")

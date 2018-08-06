@@ -1,13 +1,12 @@
 package ru.bellintegrator.practice.user.model;
 
 import ru.bellintegrator.practice.doc.model.Doc;
-import ru.bellintegrator.practice.doc_type.model.DocType;
 import ru.bellintegrator.practice.office.model.Office;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "User")
@@ -36,7 +35,7 @@ public class User {
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "doc_id", nullable = false)
-    private Set<Doc> docId;
+    private List<Doc> docId;
 
     /**
      * Имя
@@ -68,19 +67,6 @@ public class User {
     @Column(name = "phone", length = 20)
     private String phone;
 
-
-    /**
-     * Имя гражданина
-     */
-    @Column(name = "citizenship_name", length = 50)
-    private String citizenshipName;
-
-    /**
-     * Код гражданина
-     */
-    @Column(name = "citizenship_code")
-    private int citizenshipCode;
-
     /**
      * Идентифицирован
      */
@@ -94,7 +80,7 @@ public class User {
 
     }
 
-    public User(Office officeId, Set<Doc> docId, String firstName, String secondName, String middleName, int position, String phone, String citizenshipName, int citizenshipCode, boolean isIdentified) {
+    public User(Office officeId, List<Doc> docId, String firstName, String secondName, String middleName, int position, String phone, String citizenshipName, int citizenshipCode, boolean isIdentified) {
         this.officeId = officeId;
         this.docId = docId;
         this.firstName = firstName;
@@ -102,8 +88,6 @@ public class User {
         this.middleName = middleName;
         this.position = position;
         this.phone = phone;
-        this.citizenshipName = citizenshipName;
-        this.citizenshipCode = citizenshipCode;
         this.isIdentified = isIdentified;
     }
 
@@ -119,9 +103,9 @@ public class User {
         this.officeId = officeId;
     }
 
-    public Set<Doc> getDocId() {
+    public List<Doc> getDocId() {
         if(docId != null){
-            docId = new HashSet<>();
+            docId = new ArrayList<>();
         }
         return docId;
     }
@@ -172,22 +156,6 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getCitizenshipName() {
-        return citizenshipName;
-    }
-
-    public void setCitizenshipName(String citizenshipName) {
-        this.citizenshipName = citizenshipName;
-    }
-
-    public int getCitizenshipCode() {
-        return citizenshipCode;
-    }
-
-    public void setCitizenshipCode(int citizenshipCode) {
-        this.citizenshipCode = citizenshipCode;
     }
 
     public boolean isIdentified() {

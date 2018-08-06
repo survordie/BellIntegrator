@@ -24,6 +24,14 @@ public interface UserDao {
 	User getUserById(Long id);
 
 	/**
+	 * Получить User по фильтру
+	 *
+	 * @param user
+	 * @return
+	 */
+	User getUserByFilter(User user);
+
+	/**
 	* Обновить User
 	*
 	* @param user

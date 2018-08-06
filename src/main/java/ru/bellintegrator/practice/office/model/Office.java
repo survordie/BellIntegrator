@@ -24,7 +24,7 @@ public class Office {
     /**
      * Идентификатор организации
      */
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")
     private Organization organizationId;
 

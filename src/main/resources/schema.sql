@@ -53,8 +53,6 @@ CREATE TABLE IF NOT EXISTS User (
 	middle_name			VARCHAR(50),
 	position			INTEGER NOT NULL,
 	phone				VARCHAR(20),
-	citizenship_name    VARCHAR(50),
-	citizenship_code	VARCHAR(50),
 	is_identified 		BOOLEAN
 );
 

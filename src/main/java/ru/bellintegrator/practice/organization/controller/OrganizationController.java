@@ -20,7 +20,7 @@ public class OrganizationController {
         this.organizationService = organizationService;
     }
 
-    @GetMapping(value = "/list")
+    @PostMapping(value = "/list")
     public List<OrganizationListView> getOrganizations(@RequestBody OrganizationListView orgView){
         return organizationService.getOrganizations(orgView);
     }
@@ -30,12 +30,12 @@ public class OrganizationController {
         return organizationService.getOrganizationById(id);
     }
 
-    @GetMapping(value = "update")
+    @PostMapping(value = "/update")
     public String updateOrganization (@RequestBody OrganizationView orgView){
         return organizationService.updateOrganization(orgView);
     }
 
-    @GetMapping(value = "save")
+    @PostMapping(value = "/save")
     public String saveOrganization (@RequestBody OrganizationView orgView){
         return organizationService.saveOrganization(orgView);
     }

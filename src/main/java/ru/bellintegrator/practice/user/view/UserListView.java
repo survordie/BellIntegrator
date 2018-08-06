@@ -1,6 +1,10 @@
 package ru.bellintegrator.practice.user.view;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+
 public class UserListView {
+
     public Long offiseId;
     public String firstName;
     public String secondName;

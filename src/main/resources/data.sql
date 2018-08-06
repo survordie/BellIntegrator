@@ -62,20 +62,20 @@ VALUES (5, 0, '21', '5604112233', '1985-01-21');
 INSERT INTO Doc (id, version, doc_type_id, doc_number, doc_date)
 VALUES (6, 0, '21', '5605112233', '1986-01-21');
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, citizenship_code, is_identified)
-VALUES (1, 0, 1, 6, 'Петя', 'Петров', '', 2,'', '', true);
+INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (1, 0, 1, 6, 'Петя', 'Петров', '', 2,'', true);
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, citizenship_code, is_identified)
-VALUES (2, 0, 2, 5, 'Вася', 'Васин', '', 3, '', '', true);
+INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (2, 0, 2, 5, 'Вася', 'Васин', '', 3, '', true);
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, citizenship_code, is_identified)
-VALUES (3, 0, 3, 4, 'Сидор', 'Сидоров', '', 4,'', '', true);
+INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (3, 0, 3, 4, 'Сидор', 'Сидоров', '', 4,'', true);
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, citizenship_code, is_identified)
-VALUES (4, 0, 4, 3, 'Варвара', 'Орлова', '', 5,'', '', false);
+INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (4, 0, 4, 3, 'Варвара', 'Орлова', '', 5,'',  false);
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, citizenship_code, is_identified)
-VALUES (5, 0, 2, 2, 'Ваня', 'Иванов', '', 6,'', '', true);
+INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (5, 0, 2, 2, 'Ваня', 'Иванов', '', 6,'', true);
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, citizenship_code, is_identified)
-VALUES (6, 0, 1, 1, 'Коля', 'Николаев', '', 7,'', '', true);
+INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (6, 0, 1, 1, 'Коля', 'Николаев', '', 7,'', true);

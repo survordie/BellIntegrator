@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "doc_type")
-public class DocType {
+public class Doc {
 
     @Id
     @GeneratedValue
@@ -25,7 +25,7 @@ public class DocType {
      * Код документа
      */
     @OneToOne(mappedBy = "docCode", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Doc doc;
+    private ru.bellintegrator.practice.doc.model.Doc doc;
 
     /**
      * Имя документа
@@ -36,11 +36,11 @@ public class DocType {
     /**
      * Конструктор для hibernate
      */
-    public DocType(){
+    public Doc(){
 
     }
 
-    public DocType(Doc doc, String name) {
+    public Doc(ru.bellintegrator.practice.doc.model.Doc doc, String name) {
         this.doc = doc;
         this.name = name;
     }
@@ -49,11 +49,11 @@ public class DocType {
         return id;
     }
 
-    public Doc getDoc() {
+    public ru.bellintegrator.practice.doc.model.Doc getDoc() {
         return doc;
     }
 
-    public void setDoc(Doc doc) {
+    public void setDoc(ru.bellintegrator.practice.doc.model.Doc doc) {
         this.doc = doc;
     }
 

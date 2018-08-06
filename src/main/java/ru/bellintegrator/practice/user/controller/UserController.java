@@ -1,6 +1,7 @@
 package ru.bellintegrator.practice.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.bellintegrator.practice.user.service.UserService;
 import ru.bellintegrator.practice.user.view.UserListView;
@@ -11,7 +12,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(value = "/api/user", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/user", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public class UserController {
 
     private final UserService userService;
@@ -21,7 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/list")
+    @PostMapping(value = "/list")
     public List<UserListView> getUserList(@RequestBody UserListView ulw) {
         return userService.getUserList(ulw);
     }
@@ -31,12 +32,12 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @GetMapping(value = "/update")
+    @PostMapping(value = "/update")
     public String updateUser(@RequestBody UserView user){
         return userService.updateUser(user);
     }
 
-    @GetMapping(value = "/save")
+    @PostMapping(value = "/save")
     public void saveUser(@RequestBody UserView user){
         userService.saveUser(user);
     }

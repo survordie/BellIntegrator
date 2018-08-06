@@ -1,6 +1,6 @@
 package ru.bellintegrator.practice.doc.dao;
 
-import ru.bellintegrator.practice.doc_type.model.Doc;
+import ru.bellintegrator.practice.doc.model.Doc;
 
 import java.util.List;
 

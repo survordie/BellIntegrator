@@ -22,7 +22,7 @@ public class Doc {
      */
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doc_type_id")
-    private ru.bellintegrator.practice.doc_type.model.Doc docCode;
+    private ru.bellintegrator.practice.doc_type.model.DocType docCode;
 
     /**
      * Номер документа
@@ -43,7 +43,7 @@ public class Doc {
 
     }
 
-    public Doc(ru.bellintegrator.practice.doc_type.model.Doc docCode, String docNumber, Date docDate) {
+    public Doc(ru.bellintegrator.practice.doc_type.model.DocType docCode, String docNumber, Date docDate) {
         this.docCode = docCode;
         this.docNumber = docNumber;
         this.docDate = docDate;
@@ -53,11 +53,11 @@ public class Doc {
         return id;
     }
 
-    public ru.bellintegrator.practice.doc_type.model.Doc getDocCode() {
+    public ru.bellintegrator.practice.doc_type.model.DocType getDocCode() {
         return docCode;
     }
 
-    public void setDocCode(ru.bellintegrator.practice.doc_type.model.Doc docCode) {
+    public void setDocCode(ru.bellintegrator.practice.doc_type.model.DocType docCode) {
         this.docCode = docCode;
     }
 

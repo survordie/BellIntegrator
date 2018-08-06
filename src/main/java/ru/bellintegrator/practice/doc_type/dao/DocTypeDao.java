@@ -1,6 +1,6 @@
 package ru.bellintegrator.practice.doc_type.dao;
 
-import ru.bellintegrator.practice.doc_type.model.Doc;
+import ru.bellintegrator.practice.doc_type.model.DocType;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ public interface DocTypeDao {
      *
      * @return
      */
-    List<Doc> getAllDocType();
+    List<DocType> getAllDocType();
 }

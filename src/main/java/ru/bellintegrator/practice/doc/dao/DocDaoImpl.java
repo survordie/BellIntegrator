@@ -1,7 +1,7 @@
 package ru.bellintegrator.practice.doc.dao;
 
 import org.springframework.stereotype.Repository;
-import ru.bellintegrator.practice.doc_type.model.Doc;
+import ru.bellintegrator.practice.doc.model.Doc;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "doc_type")
-public class Doc {
+public class DocType {
 
     @Id
     @GeneratedValue
@@ -36,11 +36,11 @@ public class Doc {
     /**
      * Конструктор для hibernate
      */
-    public Doc(){
+    public DocType(){
 
     }
 
-    public Doc(ru.bellintegrator.practice.doc.model.Doc doc, String name) {
+    public DocType(ru.bellintegrator.practice.doc.model.Doc doc, String name) {
         this.doc = doc;
         this.name = name;
     }

@@ -1,7 +1,7 @@
 package ru.bellintegrator.practice.doc_type.dao;
 
 import org.springframework.stereotype.Repository;
-import ru.bellintegrator.practice.doc_type.model.Doc;
+import ru.bellintegrator.practice.doc_type.model.DocType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -20,8 +20,8 @@ public class DocTypeDaoImpl implements DocTypeDao {
     }
 
     @Override
-    public List<Doc> getAllDocType() {
-        TypedQuery<Doc> query = em.createQuery("SELECT dt FROM dt", Doc.class);
+    public List<DocType> getAllDocType() {
+        TypedQuery<DocType> query = em.createQuery("SELECT dt FROM dt", DocType.class);
 
         return query.getResultList();
     }

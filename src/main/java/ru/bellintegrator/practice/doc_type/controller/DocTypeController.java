@@ -22,7 +22,7 @@ public class DocTypeController {
     }
 
     @GetMapping(value = "/docs")
-    public Set<DocTypeView> getDocs(){
+    public Set<DocTypeView> getDocs() {
         return dtService.getDocTypes();
     }
 }

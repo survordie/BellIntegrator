@@ -21,7 +21,7 @@ public class DocDaoImpl implements DocDao {
 
     @Override
     public List<Doc> getAllDocuments() {
-        TypedQuery<Doc> query = em.createQuery("SELECT d FROM d", Doc.class);
+        TypedQuery<Doc> query = em.createQuery("SELECT d FROM Doc d", Doc.class);
 
         return query.getResultList();
     }

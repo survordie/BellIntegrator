@@ -25,8 +25,8 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public List<Organization> getAllOrganization() {
-        TypedQuery<Organization> query = em.createQuery("SELECT o FROM o", Organization.class);
+    public List<Organization> getAllOrganizations() {
+        TypedQuery<Organization> query = em.createQuery("SELECT o FROM Organization o", Organization.class);
 
         return query.getResultList();
     }
@@ -37,8 +37,16 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public Organization getOrganizationByFilter(String name, StringBuilder inn, boolean isActive) {
+    public Organization getOrganizationByFilter(String name, String inn, boolean isActive) {
 
+        CriteriaQuery<Organization> criteriaQuery = buildQuery(name, inn, isActive);
+
+        TypedQuery<Organization> query = em.createQuery(criteriaQuery);
+
+        return query.getSingleResult();
+    }
+
+    private CriteriaQuery<Organization> buildQuery(String name, String inn, boolean isActive) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
         CriteriaQuery<Organization> criteriaQuery = criteriaBuilder.createQuery(Organization.class);
@@ -56,15 +64,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
         }
 
         criteriaQuery.where(predicateList.toArray(new Predicate[]{}));
-
-        TypedQuery<Organization> query = em.createQuery(criteriaQuery);
-
-        return query.getSingleResult();
-    }
-
-    @Override
-    public void updateOrganization(Organization organization) {
-        em.persist(organization);
+        return criteriaQuery;
     }
 
     @Override

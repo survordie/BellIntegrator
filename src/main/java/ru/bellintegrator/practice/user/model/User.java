@@ -5,7 +5,6 @@ import ru.bellintegrator.practice.office.model.Office;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Entity
@@ -104,7 +103,7 @@ public class User {
     }
 
     public List<Doc> getDocId() {
-        if(docId != null){
+        if (docId != null) {
             docId = new ArrayList<>();
         }
         return docId;
@@ -114,7 +113,7 @@ public class User {
         getDocId().add(docId);
     }
 
-    public void removeDocId(Doc docId){
+    public void removeDocId(Doc docId) {
         getDocId().remove(docId);
     }
 

@@ -14,7 +14,7 @@ public interface OrganizationDao {
      *
      * @return
      */
-    List<Organization> getAllOrganization();
+    List<Organization> getAllOrganizations();
 
     /**
      * Получить организацию по id
@@ -27,21 +27,13 @@ public interface OrganizationDao {
     /**
      * Получить организацию по фильтру
      *
-     * @param (name, inn, isActive)
+     * @param (name,inn,isActive)
      * @return
      */
-    Organization getOrganizationByFilter(String name, StringBuilder inn, boolean isActive);
+    Organization getOrganizationByFilter(String name, String inn, boolean isActive);
 
     /**
-     * Обновить данные организации
-     *
-     * @param organization
-     * @return
-     */
-    void updateOrganization(Organization organization);
-
-    /**
-     * Добавить новую организацию
+     * СОзхранить данные организации
      *
      * @param organization
      * @return

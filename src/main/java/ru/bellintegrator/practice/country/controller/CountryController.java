@@ -23,7 +23,7 @@ public class CountryController {
     }
 
     @GetMapping(value = "/countries")
-    public Set<CountryView> getCountries(){
+    public Set<CountryView> getCountries() {
         return countryService.getCountries();
     }
 }

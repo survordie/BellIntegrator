@@ -39,7 +39,7 @@ public class Doc {
     /**
      * Конструктор для hibernate
      */
-    public Doc(){
+    public Doc() {
 
     }
 

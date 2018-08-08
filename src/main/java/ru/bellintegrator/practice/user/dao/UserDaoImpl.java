@@ -14,72 +14,72 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* {@inheritDoc}
-*/
+ * {@inheritDoc}
+ */
 @Repository
-public class UserDaoImpl implements UserDao{
-	
-	private final EntityManager em;
-	
-	@Autowired
-	public UserDaoImpl(EntityManager em){
-		this.em = em;
-	}
+public class UserDaoImpl implements UserDao {
 
-	@Override
-	public List<User> all() {
+    private final EntityManager em;
 
-		TypedQuery<User> query = em.createQuery("SELECT u FROM u", User.class);
+    @Autowired
+    public UserDaoImpl(EntityManager em) {
+        this.em = em;
+    }
 
-		return  query.getResultList();
-	}
+    @Override
+    public List<User> getAllUsers() {
 
-	@Override
-	public User getUserById(Long id) {
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
 
-		return em.find(User.class, id);
-	}
+        return query.getResultList();
+    }
 
-	@Override
-	public User getUserByFilter(User user) {
-		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+    @Override
+    public User getUserById(Long id) {
 
-		CriteriaQuery criteriaQuery = criteriaBuilder.createQuery();
-		Root<User> userRoot = criteriaQuery.from(User.class);
-		criteriaQuery.select(userRoot);
-		List<Predicate> predicateList = new ArrayList<>();
-		predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("officeId"), user.getOfficeId()));
+        return em.find(User.class, id);
+    }
 
-		if(!user.getFirstName().isEmpty()){
-			predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("firstName"), user.getFirstName()));
-		}
+    @Override
+    public User getUserByFilter(User user) {
+        CriteriaQuery<User> criteriaQuery = builderQuery(user);
 
-		if(!user.getSecondName().isEmpty()){
-			predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("firstName"), user.getSecondName()));
-		}
+        TypedQuery<User> query = em.createQuery(criteriaQuery);
 
-		if(!user.getMiddleName().isEmpty()){
-			predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("middleName"), user.getMiddleName()));
-		}
+        return query.getSingleResult();
+    }
 
-		if(user.getPosition() != 0){
-			predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("position"), user.getPosition()));
-		}
+    private CriteriaQuery<User> builderQuery(User user) {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
-		criteriaQuery.where(predicateList.toArray(new Predicate[]{}));
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> userRoot = criteriaQuery.from(User.class);
+        criteriaQuery.select(userRoot);
+        List<Predicate> predicateList = new ArrayList<>();
+        predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("officeId"), user.getOfficeId()));
 
-		TypedQuery<User> query = em.createQuery(criteriaQuery);
+        if (!user.getFirstName().isEmpty()) {
+            predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("firstName"), user.getFirstName()));
+        }
 
-		return query.getSingleResult();
-	}
+        if (!user.getSecondName().isEmpty()) {
+            predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("firstName"), user.getSecondName()));
+        }
 
-	@Override
-	public void updateUser(User user) {
-		em.persist(user);
-	}
+        if (!user.getMiddleName().isEmpty()) {
+            predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("middleName"), user.getMiddleName()));
+        }
 
-	@Override
-	public void saveUser(User user) {
-		em.persist(user);
-	}
+        if (user.getPosition() != 0) {
+            predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("position"), user.getPosition()));
+        }
+
+        criteriaQuery.where(predicateList.toArray(new Predicate[]{}));
+        return criteriaQuery;
+    }
+
+    @Override
+    public void saveUser(User user) {
+        em.persist(user);
+    }
 }

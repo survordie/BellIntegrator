@@ -5,7 +5,7 @@ import ru.bellintegrator.practice.country.model.Country;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "organization")
+@Table(name = "Organization")
 public class Organization {
 
     @Id

@@ -26,7 +26,7 @@ public class OfficeDaoImpl implements OfficeDao {
 
     @Override
     public List<Office> getAllOffices() {
-        TypedQuery<Office> query = em.createQuery("SELECT o FROM o", Office.class);
+        TypedQuery<Office> query = em.createQuery("SELECT o FROM Office o", Office.class);
 
         return query.getResultList();
     }
@@ -38,36 +38,36 @@ public class OfficeDaoImpl implements OfficeDao {
 
     @Override
     public Office getOfficeByFilter(String orgId, String name, String phone, boolean isActive) {
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-
-        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery();
-        Root<Office> officeRoot = criteriaQuery.from(Office.class);
-        criteriaQuery.select(officeRoot);
-        List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(criteriaBuilder.equal(officeRoot.get("organizationId"), orgId));
-
-        if(name != null){
-            predicateList.add(criteriaBuilder.equal(officeRoot.get("name"), name));
-        }
-
-        if(phone != null){
-            predicateList.add(criteriaBuilder.equal(officeRoot.get("phone"), phone));
-        }
-
-        if(isActive){
-            predicateList.add(criteriaBuilder.equal(officeRoot.get("isActive"), isActive));
-        }
-
-        criteriaQuery.where(predicateList.toArray(new Predicate[]{}));
+        CriteriaQuery<Office> criteriaQuery = buildQuery(orgId, name, phone, isActive);
 
         TypedQuery<Office> query = em.createQuery(criteriaQuery);
 
         return query.getSingleResult();
     }
 
-    @Override
-    public void updateOffice(Office office) {
-        em.persist(office);
+    private CriteriaQuery<Office> buildQuery(String orgId, String name, String phone, boolean isActive) {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+
+        CriteriaQuery<Office> criteriaQuery = criteriaBuilder.createQuery(Office.class);
+        Root<Office> officeRoot = criteriaQuery.from(Office.class);
+        criteriaQuery.select(officeRoot);
+        List<Predicate> predicateList = new ArrayList<>();
+        predicateList.add(criteriaBuilder.equal(officeRoot.get("organizationId"), orgId));
+
+        if (name != null) {
+            predicateList.add(criteriaBuilder.equal(officeRoot.get("name"), name));
+        }
+
+        if (phone != null) {
+            predicateList.add(criteriaBuilder.equal(officeRoot.get("phone"), phone));
+        }
+
+        if (isActive) {
+            predicateList.add(criteriaBuilder.equal(officeRoot.get("isActive"), isActive));
+        }
+
+        criteriaQuery.where(predicateList.toArray(new Predicate[]{}));
+        return criteriaQuery;
     }
 
     @Override

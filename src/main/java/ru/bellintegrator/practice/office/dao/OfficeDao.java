@@ -27,20 +27,13 @@ public interface OfficeDao {
     /**
      * Получить офис по фильтру
      *
-     * @param (orgId, name, phone, isActive)
+     * @param (orgId,name,phone,isActive)
      * @return
      */
     Office getOfficeByFilter(String orgId, String name, String phone, boolean isActive);
 
     /**
-     * Обновить данные для офиса
-     *
-     * @param office
-     */
-    void updateOffice(Office office);
-
-    /**
-     * Добавить новый офис
+     * Сохранить данные офиса
      *
      * @param office
      */

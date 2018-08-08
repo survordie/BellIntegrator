@@ -1,12 +1,12 @@
 CREATE TABLE IF NOT EXISTS Country (
-    id          INTEGER  PRIMARY KEY AUTO_INCREMENT,
+    id          BIGINT  PRIMARY KEY AUTO_INCREMENT,
     version     INTEGER NOT NULL,
     name        VARCHAR(100),
     code        VARCHAR(3) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Organization (
-	id          INTEGER  PRIMARY KEY AUTO_INCREMENT,
+	id          BIGINT  PRIMARY KEY AUTO_INCREMENT,
 	version     INTEGER NOT NULL,
 	country_id  VARCHAR(3) NOT NULL,
 	name		VARCHAR(50) NOT NULL,
@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS Organization (
 );
 
 CREATE TABLE IF NOT EXISTS Office (
-	id          INTEGER  PRIMARY KEY AUTO_INCREMENT,
+	id          BIGINT  PRIMARY KEY AUTO_INCREMENT,
 	version     INTEGER NOT NULL,
-	organization_id INTEGER NOT NULL,
+	organization_id BIGINT NOT NULL,
 	name		VARCHAR(200) NOT NULL,
 	address		VARCHAR(200) NOT NULL,
 	phone		VARCHAR(20),
@@ -29,14 +29,14 @@ CREATE TABLE IF NOT EXISTS Office (
 );
 
 CREATE TABLE IF NOT EXISTS Doc_Type (
-    id          INTEGER  PRIMARY KEY AUTO_INCREMENT,
+    id          BIGINT  PRIMARY KEY AUTO_INCREMENT,
     version     INTEGER NOT NULL,
     name        VARCHAR(200),
     code        VARCHAR(3) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Doc (
-	id          INTEGER  PRIMARY KEY AUTO_INCREMENT,
+	id          BIGINT  PRIMARY KEY AUTO_INCREMENT,
 	version     INTEGER NOT NULL,
 	doc_type_id VARCHAR(3) NOT NULL,
     doc_number	VARCHAR(50),
@@ -44,10 +44,10 @@ CREATE TABLE IF NOT EXISTS Doc (
 );
 
 CREATE TABLE IF NOT EXISTS User (
-	id                  INTEGER  PRIMARY KEY AUTO_INCREMENT,
+	id                  BIGINT  PRIMARY KEY AUTO_INCREMENT,
 	version    			INTEGER NOT NULL,
-	office_id           INTEGER NOT NULL,
-	doc_id              INTEGER NOT NULL,
+	office_id           BIGINT NOT NULL,
+	doc_id              BIGINT NOT NULL,
 	first_name 			VARCHAR(50) NOT NULL,
 	second_name			VARCHAR(50),
 	middle_name			VARCHAR(50),

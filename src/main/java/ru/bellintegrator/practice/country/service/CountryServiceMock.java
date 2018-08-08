@@ -8,10 +8,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@Primary
-public class CountryServiceMock implements CountryService{
+//@Primary
+public class CountryServiceMock implements CountryService {
 
-    public CountryServiceMock(){
+    public CountryServiceMock() {
 
     }
 

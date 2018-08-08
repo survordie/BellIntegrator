@@ -8,10 +8,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@Primary
+//@Primary
 public class DocTypeServiceMock implements DocTypeService {
 
-    public DocTypeServiceMock(){
+    public DocTypeServiceMock() {
 
     }
 

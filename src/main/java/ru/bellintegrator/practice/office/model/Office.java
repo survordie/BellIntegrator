@@ -1,13 +1,11 @@
 package ru.bellintegrator.practice.office.model;
 
 import ru.bellintegrator.practice.organization.model.Organization;
-import ru.bellintegrator.practice.user.model.User;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "office")
+@Table(name = "Office")
 public class Office {
 
     @Id
@@ -55,7 +53,7 @@ public class Office {
     /**
      * Конструктор для hibernate
      */
-    public Office(){
+    public Office() {
 
     }
 

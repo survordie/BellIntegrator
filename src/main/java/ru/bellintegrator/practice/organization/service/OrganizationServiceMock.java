@@ -2,7 +2,6 @@ package ru.bellintegrator.practice.organization.service;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-import ru.bellintegrator.practice.organization.model.Organization;
 import ru.bellintegrator.practice.organization.view.OrganizationListView;
 import ru.bellintegrator.practice.organization.view.OrganizationView;
 
@@ -10,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Primary
+//@Primary
 public class OrganizationServiceMock implements OrganizationService {
 
-    public OrganizationServiceMock(){
+    public OrganizationServiceMock() {
 
     }
 

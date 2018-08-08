@@ -10,13 +10,16 @@ import java.util.List;
  */
 public interface UserService {
 
-/**
- * Получить данные пользователя по id
- *
- * @return user
- */
-UserView getUserById(long id);
-List<UserListView> getUserList(UserListView ulw);
-String updateUser(UserView user);
-void saveUser(UserView user);
+    /**
+     * Получить данные пользователя по id
+     *
+     * @return user
+     */
+    UserView getUserById(long id);
+
+    List<UserListView> getUserList(UserListView ulw);
+
+    String updateUser(UserView user);
+
+    void saveUser(UserView user);
 }

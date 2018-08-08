@@ -1,12 +1,17 @@
 package ru.bellintegrator.practice.country.model;
 
-import ru.bellintegrator.practice.organization.model.Organization;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "country")
+@Table(name = "Country")
 public class Country {
 
     @Id
@@ -23,19 +28,23 @@ public class Country {
     /**
      * Наименование страны
      */
+    @NotNull
+    @NotEmpty
     @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * Код страны
      */
+    @NotNull
+    @NotEmpty
     @Column(name = "code", nullable = false)
     private String code;
 
     /**
      * Конструктор для hibernate
      */
-    public Country(){
+    public Country() {
 
     }
 

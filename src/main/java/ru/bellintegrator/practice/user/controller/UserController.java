@@ -1,7 +1,6 @@
 package ru.bellintegrator.practice.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.bellintegrator.practice.user.service.UserService;
 import ru.bellintegrator.practice.user.view.UserListView;
@@ -33,12 +32,12 @@ public class UserController {
     }
 
     @PostMapping(value = "/update")
-    public String updateUser(@RequestBody UserView user){
+    public String updateUser(@RequestBody UserView user) {
         return userService.updateUser(user);
     }
 
     @PostMapping(value = "/save")
-    public void saveUser(@RequestBody UserView user){
+    public void saveUser(@RequestBody UserView user) {
         userService.saveUser(user);
     }
 }

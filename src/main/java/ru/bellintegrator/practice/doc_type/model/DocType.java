@@ -1,13 +1,9 @@
 package ru.bellintegrator.practice.doc_type.model;
 
-import ru.bellintegrator.practice.doc.model.Doc;
-import ru.bellintegrator.practice.user.model.User;
-
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "doc_type")
+@Table(name = "Doc_Type")
 public class DocType {
 
     @Id
@@ -24,8 +20,8 @@ public class DocType {
     /**
      * Код документа
      */
-    @OneToOne(mappedBy = "docCode", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private ru.bellintegrator.practice.doc.model.Doc doc;
+    @Column(name = "code")
+    private String code;
 
     /**
      * Имя документа
@@ -36,12 +32,12 @@ public class DocType {
     /**
      * Конструктор для hibernate
      */
-    public DocType(){
+    public DocType() {
 
     }
 
-    public DocType(ru.bellintegrator.practice.doc.model.Doc doc, String name) {
-        this.doc = doc;
+    public DocType(String code, String name) {
+        this.code = code;
         this.name = name;
     }
 
@@ -49,12 +45,12 @@ public class DocType {
         return id;
     }
 
-    public ru.bellintegrator.practice.doc.model.Doc getDoc() {
-        return doc;
+    public String getCode() {
+        return code;
     }
 
-    public void setDoc(ru.bellintegrator.practice.doc.model.Doc doc) {
-        this.doc = doc;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {

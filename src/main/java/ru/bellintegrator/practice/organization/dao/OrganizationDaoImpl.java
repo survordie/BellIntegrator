@@ -37,13 +37,13 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public Organization getOrganizationByFilter(String name, String inn, boolean isActive) {
+    public List<Organization> getOrganizationByFilter(String name, String inn, boolean isActive) {
 
         CriteriaQuery<Organization> criteriaQuery = buildQuery(name, inn, isActive);
 
         TypedQuery<Organization> query = em.createQuery(criteriaQuery);
 
-        return query.getSingleResult();
+        return query.getResultList();
     }
 
     private CriteriaQuery<Organization> buildQuery(String name, String inn, boolean isActive) {
@@ -59,9 +59,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
             predicateList.add(criteriaBuilder.equal(organizationRoot.get("inn"), inn));
         }
 
-        if(isActive){
-            predicateList.add(criteriaBuilder.equal(organizationRoot.get("isActive"), isActive));
-        }
+//        if(isActive){
+//            predicateList.add(criteriaBuilder.equal(organizationRoot.get("isActive"), isActive));
+//        }
 
         criteriaQuery.where(predicateList.toArray(new Predicate[]{}));
         return criteriaQuery;

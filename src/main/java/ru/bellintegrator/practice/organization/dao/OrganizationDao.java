@@ -30,7 +30,7 @@ public interface OrganizationDao {
      * @param (name,inn,isActive)
      * @return
      */
-    Organization getOrganizationByFilter(String name, String inn, boolean isActive);
+    List<Organization> getOrganizationByFilter(String name, String inn, boolean isActive);
 
     /**
      * СОзхранить данные организации

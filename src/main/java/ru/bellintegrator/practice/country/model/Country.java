@@ -1,5 +1,6 @@
 package ru.bellintegrator.practice.country.model;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;

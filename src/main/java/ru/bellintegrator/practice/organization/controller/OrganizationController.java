@@ -20,9 +20,12 @@ public class OrganizationController {
     }
 
     @PostMapping(value = "/list")
-    public List<OrganizationListView> getOrganizations(@RequestBody OrganizationListView orgView) {
-        return organizationService.getOrganizations(orgView);
+    public List<OrganizationListView> getOrganizations(@RequestBody String name, String inn, boolean isActive) {
+        return organizationService.getOrganizations(name, inn, isActive);
     }
+//    public String getOrganizations(@RequestBody String name, String inn, boolean isActive) {
+//        return organizationService.getOrganizations(name, inn, isActive);
+//    }
 
     @GetMapping(value = "/{id}")
     public OrganizationView getOrganizationsById(@PathVariable long id) {
@@ -31,7 +34,7 @@ public class OrganizationController {
 
     @PostMapping(value = "/update")
     public String updateOrganization(@RequestBody OrganizationView orgView) {
-        return organizationService.updateOrganization(orgView);
+        return organizationService.saveOrganization(orgView);
     }
 
     @PostMapping(value = "/save")

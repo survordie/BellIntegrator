@@ -1,5 +1,8 @@
 package ru.bellintegrator.practice.country.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,10 +28,21 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     @Transactional
-    public Set<CountryView> getCountries() {
+//    public Set<CountryView>
+    public String getCountries() throws JsonProcessingException {
         Set<Country> countrySet = countryDao.getAllCountries();
+        Set<CountryView> countryViewSet = countrySet.stream().map(mapCountry()).collect(Collectors.toSet());
 
-        return countrySet.stream().map(mapCountry()).collect(Collectors.toSet());
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (CountryView countryView : countryViewSet) {
+            stringBuilder.append(mapper.writeValueAsString(countryView));
+        }
+
+        return stringBuilder.toString();
     }
 
     private Function<Country, CountryView> mapCountry(){

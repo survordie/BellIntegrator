@@ -1,5 +1,8 @@
 package ru.bellintegrator.practice.country.view;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+@JsonRootName(value = "data")
 public class CountryView {
 
     public Long id;

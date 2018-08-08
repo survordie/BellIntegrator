@@ -9,18 +9,16 @@ public interface OrganizationService {
 
     /**
      * Получить организации по фильтру
+     * @param name
+     * @param inn
+     * @param isActive
      */
-    List<OrganizationListView> getOrganizations(OrganizationListView view);
+    List<OrganizationListView> getOrganizations(String name, String inn, boolean isActive);
 
     /**
      * Получить организацию по id
      */
     OrganizationView getOrganizationById(Long id);
-
-    /**
-     * Обновить данные организации
-     */
-    String updateOrganization(OrganizationView view);
 
     /**
      * Добавить данные организации

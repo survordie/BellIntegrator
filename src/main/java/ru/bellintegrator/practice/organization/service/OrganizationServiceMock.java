@@ -1,6 +1,5 @@
 package ru.bellintegrator.practice.organization.service;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.organization.view.OrganizationListView;
 import ru.bellintegrator.practice.organization.view.OrganizationView;
@@ -17,12 +16,13 @@ public class OrganizationServiceMock implements OrganizationService {
     }
 
     @Override
-    public List<OrganizationListView> getOrganizations(OrganizationListView view) {
+    public List<OrganizationListView> getOrganizations(String name, String inn, boolean isActive) {
+//    public String getOrganizations(String name, String inn, boolean isActive) {
         List<OrganizationListView> organizationViewList = new ArrayList<>();
 
         OrganizationListView organizationView = new OrganizationListView();
         //organizationView.countryId = "643";
-        organizationView.name = "Org 1";
+        organizationView.id = 1L;
         //organizationView.address = "Address 1";
         //organizationView.fullName = "Name org 1";
         organizationView.inn = "INN";
@@ -33,6 +33,7 @@ public class OrganizationServiceMock implements OrganizationService {
         organizationViewList.add(organizationView);
 
         return organizationViewList;
+//        return "success";
     }
 
     @Override
@@ -49,11 +50,6 @@ public class OrganizationServiceMock implements OrganizationService {
         organizationView.phone = "phone";
 
         return organizationView;
-    }
-
-    @Override
-    public String updateOrganization(OrganizationView view) {
-        return "success";
     }
 
     @Override

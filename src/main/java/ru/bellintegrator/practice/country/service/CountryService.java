@@ -1,9 +1,7 @@
 package ru.bellintegrator.practice.country.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import ru.bellintegrator.practice.country.view.CountryView;
 
-import java.util.List;
 import java.util.Set;
 
 public interface CountryService {
@@ -13,6 +11,5 @@ public interface CountryService {
      *
      * @return
      */
-//    Set<CountryView> getCountries();
-    String getCountries() throws JsonProcessingException;
+    Set<CountryView> getCountries();
 }

@@ -15,4 +15,9 @@ public interface DocDao {
      * @return
      */
     List<Doc> getAllDocuments();
+
+    /**
+     * Сохранить данные нового документа
+     */
+    void saveDocument(Doc doc);
 }

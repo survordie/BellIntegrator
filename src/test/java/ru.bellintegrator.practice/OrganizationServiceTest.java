@@ -25,12 +25,24 @@ public class OrganizationServiceTest {
 
     @Test
     public void test(){
-        List<OrganizationListView> organizationListViews = organizationService.getOrganizations("Tinkoff","7710140679",true);
+        OrganizationListView organizationlistview = new OrganizationListView();
+        organizationlistview.name = "Tinkoff";
+        organizationlistview.inn = "7710140679";
+        organizationlistview.isActive = true;
+        List<OrganizationListView> organizationListViews = organizationService.getOrganizations(organizationlistview);
 
         for (OrganizationListView organizationListView : organizationListViews) {
             System.out.println(organizationListView.toString());
         }
         System.out.println(organizationListViews.size());
 //        String string = organizationService.getOrganizations("Tinkoff","7710140679",true);
+    }
+
+    @Test
+    public void saveTest(){
+        OrganizationListView organizationlistview = new OrganizationListView();
+        organizationlistview.name = "Tinsun";
+        organizationlistview.inn = "7710140679";
+        organizationlistview.isActive = true;
     }
 }

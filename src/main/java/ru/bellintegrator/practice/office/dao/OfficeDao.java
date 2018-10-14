@@ -22,7 +22,7 @@ public interface OfficeDao {
      * @param id
      * @return
      */
-    Office getOfficebyId(Long id);
+    Office getOfficeById(Long id);
 
     /**
      * Получить офис по фильтру
@@ -30,7 +30,7 @@ public interface OfficeDao {
      * @param (orgId,name,phone,isActive)
      * @return
      */
-    Office getOfficeByFilter(String orgId, String name, String phone, boolean isActive);
+    List<Office> getOfficeByFilter(Long orgId, String name, String phone, boolean isActive);
 
     /**
      * Сохранить данные офиса
@@ -38,4 +38,11 @@ public interface OfficeDao {
      * @param office
      */
     void saveOffice(Office office);
+
+    /**
+     * Обновить данные офиса
+     *
+     * @param office
+     */
+    void updateOffice(Office office);
 }

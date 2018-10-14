@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Office {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -22,7 +22,7 @@ public class Office {
     /**
      * Идентификатор организации
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "organization_id")
     private Organization organizationId;
 
@@ -69,6 +69,10 @@ public class Office {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Organization getOrganizationId() {
         return organizationId;
     }
@@ -107,5 +111,17 @@ public class Office {
 
     public void setIsActive(String isActive) {
         this.isActive = isActive;
+    }
+
+    @Override
+    public String toString() {
+        return "Office{" +
+                "id=" + id +
+                ", organizationId=" + organizationId +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isActive='" + isActive + '\'' +
+                '}';
     }
 }

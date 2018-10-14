@@ -11,6 +11,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * {@inheritDoc}
@@ -32,20 +33,20 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public Office getOfficebyId(Long id) {
+    public Office getOfficeById(Long id) {
         return em.find(Office.class, id);
     }
 
     @Override
-    public Office getOfficeByFilter(String orgId, String name, String phone, boolean isActive) {
+    public List<Office> getOfficeByFilter(Long orgId, String name, String phone, boolean isActive) {
         CriteriaQuery<Office> criteriaQuery = buildQuery(orgId, name, phone, isActive);
 
         TypedQuery<Office> query = em.createQuery(criteriaQuery);
 
-        return query.getSingleResult();
+        return query.getResultList().stream().collect(Collectors.toList());
     }
 
-    private CriteriaQuery<Office> buildQuery(String orgId, String name, String phone, boolean isActive) {
+    private CriteriaQuery<Office> buildQuery(Long orgId, String name, String phone, boolean isActive) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
         CriteriaQuery<Office> criteriaQuery = criteriaBuilder.createQuery(Office.class);
@@ -72,6 +73,21 @@ public class OfficeDaoImpl implements OfficeDao {
 
     @Override
     public void saveOffice(Office office) {
+
         em.persist(office);
+    }
+
+    @Override
+    public void updateOffice(Office office) {
+        Office of = em.find(Office.class, office.getId());
+
+        if(of != null){
+            of.setName(office.getName());
+            of.setOrganizationId(office.getOrganizationId());
+            of.setAddress(office.getAddress());
+            of.setPhone(office.getPhone());
+            of.setIsActive(office.getIsActive());
+        }
+        em.flush();
     }
 }

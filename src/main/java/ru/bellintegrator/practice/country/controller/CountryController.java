@@ -24,10 +24,10 @@ public class CountryController {
     }
 
     @GetMapping(value = "/countries")
-//    public Set<CountryView> getCountries() {
-//        return countryService.getCountries();
-//    }
-    public String getCountries() throws JsonProcessingException {
+    public Set<CountryView> getCountries() {
         return countryService.getCountries();
     }
+//    public String getCountries() throws JsonProcessingException {
+//        return countryService.getCountries();
+//    }
 }

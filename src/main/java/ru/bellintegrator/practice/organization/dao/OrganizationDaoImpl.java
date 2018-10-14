@@ -1,5 +1,6 @@
 package ru.bellintegrator.practice.organization.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.practice.organization.model.Organization;
 
@@ -20,6 +21,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
 
     private final EntityManager em;
 
+    @Autowired
     public OrganizationDaoImpl(EntityManager em) {
         this.em = em;
     }
@@ -55,13 +57,13 @@ public class OrganizationDaoImpl implements OrganizationDao {
         List<Predicate> predicateList = new ArrayList<>();
         predicateList.add(criteriaBuilder.equal(organizationRoot.get("name"), name));
 
-        if(inn != null){
+        if (inn != null) {
             predicateList.add(criteriaBuilder.equal(organizationRoot.get("inn"), inn));
         }
 
-//        if(isActive){
-//            predicateList.add(criteriaBuilder.equal(organizationRoot.get("isActive"), isActive));
-//        }
+        if(isActive){
+            predicateList.add(criteriaBuilder.equal(organizationRoot.get("isActive"), isActive));
+        }
 
         criteriaQuery.where(predicateList.toArray(new Predicate[]{}));
         return criteriaQuery;
@@ -69,6 +71,24 @@ public class OrganizationDaoImpl implements OrganizationDao {
 
     @Override
     public void saveOrganization(Organization organization) {
+
         em.persist(organization);
+    }
+
+    @Override
+    public void updateOrganization(Organization organization) {
+
+        Organization org = em.find(Organization.class, organization.getId());
+        if(org != null) {
+            org.setCountryId(organization.getCountryId());
+            org.setName(organization.getName());
+            org.setPhone(organization.getPhone());
+            org.setKpp(organization.getKpp());
+            org.setInn(organization.getInn());
+            org.setFullName(organization.getFullName());
+            org.setAddress(organization.getAddress());
+            org.setActive(organization.isActive());
+        }
+        em.flush();
     }
 }

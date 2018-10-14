@@ -7,12 +7,12 @@ public class UserView {
     public String secondName;
     public String middleName;
     public int position;
-    public int officeId;
-    public int docTypeId;
-    public int docId;
+    public Long officeId;
+    public String docTypeId;
+    public String docId;
     public String phone;
-    public String citizenshipName;
-    public int citizenshipCode;
+    public String citizenshipName;  //Имя страны
+    public String citizenshipCode;  //Код страны
     public boolean isIdentified;
 
     @Override

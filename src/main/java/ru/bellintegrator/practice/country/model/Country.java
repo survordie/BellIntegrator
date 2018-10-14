@@ -1,14 +1,6 @@
 package ru.bellintegrator.practice.country.model;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -16,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class Country {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -30,7 +22,6 @@ public class Country {
      * Наименование страны
      */
     @NotNull
-    @NotEmpty
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -38,7 +29,6 @@ public class Country {
      * Код страны
      */
     @NotNull
-    @NotEmpty
     @Column(name = "code", nullable = false)
     private String code;
 

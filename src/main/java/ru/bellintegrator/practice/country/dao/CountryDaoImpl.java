@@ -6,7 +6,9 @@ import ru.bellintegrator.practice.country.model.Country;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,5 +30,24 @@ public class CountryDaoImpl implements CountryDao {
         TypedQuery<Country> query = em.createQuery("SELECT c FROM Country c", Country.class);
 
         return query.getResultList().stream().collect(Collectors.toSet());
+    }
+
+    @Override
+    public Country getCountryByCode(String code) {
+
+        CriteriaQuery<Country> criteria = buildCriteria(code);
+        TypedQuery<Country> query = em.createQuery(criteria);
+
+        return ((Country) query.getSingleResult());
+    }
+
+    private CriteriaQuery<Country> buildCriteria(String code) {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Country> criteria = builder.createQuery(Country.class);
+
+        Root<Country> country = criteria.from(Country.class);
+        criteria.where(builder.equal(country.get("code"), code));
+
+        return criteria;
     }
 }

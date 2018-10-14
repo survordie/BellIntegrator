@@ -3,65 +3,100 @@ package ru.bellintegrator.practice.organization.service;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
+import org.hibernate.exception.DataException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.bellintegrator.practice.country.dao.CountryDao;
 import ru.bellintegrator.practice.organization.dao.OrganizationDao;
 import ru.bellintegrator.practice.organization.model.Organization;
 import ru.bellintegrator.practice.organization.view.OrganizationListView;
 import ru.bellintegrator.practice.organization.view.OrganizationView;
+import ru.bellintegrator.practice.utils.ResultView;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 @Primary
 public class OrganizationServiceImpl implements OrganizationService {
 
     private final OrganizationDao organizationDao;
+    private final CountryDao countryDao;
+    private static final String OK = "result\": \"success";
 
-    public OrganizationServiceImpl(OrganizationDao organizationDao) {
+    @Autowired
+    public OrganizationServiceImpl(OrganizationDao organizationDao, CountryDao countryDao) {
         this.organizationDao = organizationDao;
+        this.countryDao = countryDao;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<OrganizationListView> getOrganizations(String name, String inn, boolean isActive) {
+    @Transactional(readOnly = true)
+    public List<OrganizationListView> getOrganizations(OrganizationListView organizationlistview) {
 
-        List<Organization> organizationList = organizationDao.getOrganizationByFilter(name, inn, isActive);
-        List<OrganizationListView> organizationListView = new ArrayList<>();
+        List<Organization> organizationList = organizationDao.getOrganizationByFilter(organizationlistview.name, organizationlistview.inn, organizationlistview.isActive);
+        List<OrganizationListView> organizationListView = mapOrganizationListView(organizationList);
 
 
-        return organizationList.stream().map(mapOrganizationLV()).collect(Collectors.toList());
+        return organizationListView;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
+    @Transactional(readOnly = true)
     public OrganizationView getOrganizationById(Long id) {
         Organization organization = organizationDao.getOrganizationById(id);
-//        OrganizationView view = new OrganizationView();
-//
-//        view.id = organization.getId();
-//        view.name = organization.getName();
-//        view.fullName = organization.getFullName();
-//        view.inn = organization.getInn();
-//        view.kpp = organization.getKpp();
-//        view.address = organization.getAddress();
-//        view.phone = organization.getPhone();
-//        view.isActive = organization.isActive();
+
         OrganizationView view = mapOrganization(organization);
 
         return view;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String saveOrganization(OrganizationView view) {
-        return null;
+    @Transactional
+    public ResultView saveOrganization(OrganizationView view) {
+
+        Organization organization = reverseMapOrganization(view);
+        organization.setCountryId(countryDao.getCountryByCode(view.countryId));
+
+        organizationDao.saveOrganization(organization);
+
+        return new ResultView();
+    }
+
+    @Override
+    @Transactional
+    public ResultView updateOrganization(OrganizationView view) {
+
+        if (organizationDao.getOrganizationById(view.id) != null) {
+            Organization organization = reverseMapOrganization(view);
+            organization.setCountryId(countryDao.getCountryByCode(view.countryId));
+
+            organizationDao.updateOrganization(organization);
+        } else{
+            throw new DataIntegrityViolationException(view.id + "not found");
+        }
+        return new ResultView();
     }
 
     private OrganizationView mapOrganization(Organization organization) {
 
-        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().mapNulls(false).build();
-        mapperFactory.classMap(Organization.class, OrganizationView.class).exclude("countryId").byDefault().register();
+        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+        mapperFactory.classMap(Organization.class, OrganizationView.class).exclude("countryId").mapNulls(false).byDefault().register();
         MapperFacade mapperFacade = mapperFactory.getMapperFacade();
 
         OrganizationView organizationView = mapperFacade.map(organization, OrganizationView.class);
@@ -69,19 +104,24 @@ public class OrganizationServiceImpl implements OrganizationService {
         return organizationView;
     }
 
-    private OrganizationListView mapOrganizationListView(Organization organization){
+    private Organization reverseMapOrganization(OrganizationView organizationView) {
+
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-        mapperFactory.classMap(Organization.class, OrganizationListView.class);
+        mapperFactory.classMap(OrganizationView.class, Organization.class).mapNulls(false).byDefault().register();
         MapperFacade mapperFacade = mapperFactory.getMapperFacade();
 
-        OrganizationListView organizationListView = mapperFacade.map(organization, OrganizationListView.class);
+        Organization organization = mapperFacade.map(organizationView, Organization.class);
 
-        return organizationListView;
+        return organization;
     }
 
-    private Function<Organization, OrganizationListView> mapOrganizationLV(){
-        return  o -> {
-            return mapOrganizationListView(o);
-        };
+    private List<OrganizationListView> mapOrganizationListView(List<Organization> organization) {
+        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().mapNulls(false).build();
+        mapperFactory.classMap(Organization.class, OrganizationListView.class).mapNulls(false).byDefault().register();
+        MapperFacade mapperFacade = mapperFactory.getMapperFacade();
+
+        List<OrganizationListView> organizationListView = mapperFacade.mapAsList(organization, OrganizationListView.class);
+
+        return organizationListView;
     }
 }

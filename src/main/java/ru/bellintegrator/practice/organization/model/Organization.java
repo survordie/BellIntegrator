@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Organization {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -23,7 +23,7 @@ public class Organization {
      * Страна
      */
     @ManyToOne
-    @JoinColumn(name = "country_id", nullable = false)
+    @JoinColumn(name = "country_id")
     private Country countryId;
 
     /**
@@ -75,7 +75,8 @@ public class Organization {
 
     }
 
-    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
+    public Organization(Country countryId, String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
+        this.countryId = countryId;
         this.name = name;
         this.fullName = fullName;
         this.inn = inn;
@@ -87,6 +88,10 @@ public class Organization {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Country getCountryId() {

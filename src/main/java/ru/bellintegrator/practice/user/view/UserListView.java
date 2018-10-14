@@ -2,18 +2,18 @@ package ru.bellintegrator.practice.user.view;
 
 public class UserListView {
 
-    public Long offiseId;
+    public Long officeId;
     public String firstName;
     public String secondName;
     public String middleName;
     public int position;
-    public int docCode;
-    public int citizenshipCode;
+    public String docCode;
+    public String citizenshipCode;  //Код страны
 
     @Override
     public String toString() {
         return "UserListView{" +
-                "offiseId=" + offiseId +
+                "offiseId=" + officeId +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", middleName='" + middleName + '\'' +

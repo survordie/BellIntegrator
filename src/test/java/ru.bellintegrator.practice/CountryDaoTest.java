@@ -29,4 +29,13 @@ public class CountryDaoTest {
         Set<Country> countrySet = countryDao.getAllCountries();
         Assert.assertNotNull(countrySet);
     }
+
+    @Test
+    public void test1(){
+        Country country = countryDao.getCountryByCode("643");
+
+        System.out.println(country.getId());
+        System.out.println(country.getName());
+        Assert.assertEquals(country.getCode(), "643");
+    }
 }

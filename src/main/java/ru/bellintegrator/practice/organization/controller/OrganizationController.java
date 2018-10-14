@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.bellintegrator.practice.organization.service.OrganizationService;
 import ru.bellintegrator.practice.organization.view.OrganizationListView;
 import ru.bellintegrator.practice.organization.view.OrganizationView;
+import ru.bellintegrator.practice.utils.ResultView;
 
 import java.util.List;
 
@@ -20,25 +21,25 @@ public class OrganizationController {
     }
 
     @PostMapping(value = "/list")
-    public List<OrganizationListView> getOrganizations(@RequestBody String name, String inn, boolean isActive) {
-        return organizationService.getOrganizations(name, inn, isActive);
+    public @ResponseBody List<OrganizationListView> getOrganizations(@RequestBody OrganizationListView organizationlistview) {
+        return organizationService.getOrganizations(organizationlistview);
     }
 //    public String getOrganizations(@RequestBody String name, String inn, boolean isActive) {
 //        return organizationService.getOrganizations(name, inn, isActive);
 //    }
 
     @GetMapping(value = "/{id}")
-    public OrganizationView getOrganizationsById(@PathVariable long id) {
+    public OrganizationView getOrganizationsById(@PathVariable Long id) {
         return organizationService.getOrganizationById(id);
     }
 
     @PostMapping(value = "/update")
-    public String updateOrganization(@RequestBody OrganizationView orgView) {
-        return organizationService.saveOrganization(orgView);
+    public ResultView updateOrganization(@RequestBody OrganizationView orgView) {
+        return organizationService.updateOrganization(orgView);
     }
 
     @PostMapping(value = "/save")
-    public String saveOrganization(@RequestBody OrganizationView orgView) {
+    public ResultView saveOrganization(@RequestBody OrganizationView orgView) {
         return organizationService.saveOrganization(orgView);
     }
 }

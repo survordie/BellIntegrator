@@ -19,10 +19,21 @@ public class DocDaoImpl implements DocDao {
         this.em = em;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Doc> getAllDocuments() {
         TypedQuery<Doc> query = em.createQuery("SELECT d FROM Doc d", Doc.class);
 
         return query.getResultList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void saveDocument(Doc doc) {
+        em.persist(doc);
     }
 }

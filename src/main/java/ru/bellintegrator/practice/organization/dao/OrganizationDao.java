@@ -33,10 +33,18 @@ public interface OrganizationDao {
     List<Organization> getOrganizationByFilter(String name, String inn, boolean isActive);
 
     /**
-     * СОзхранить данные организации
+     * Сохранить данные организации
      *
      * @param organization
      * @return
      */
     void saveOrganization(Organization organization);
+
+    /**
+     * Обновить данные организации
+     *
+     * @param organization
+     * @return
+     */
+    void updateOrganization(Organization organization);
 }

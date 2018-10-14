@@ -3,19 +3,19 @@ package ru.bellintegrator.practice.office.service;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.office.view.OfficeView;
+import ru.bellintegrator.practice.utils.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Primary
 public class OfficeServiceMock implements OfficeService {
 
     @Override
-    public List<OfficeView> getOffices() {
+    public List<OfficeView> getOffices(OfficeView officeView) {
         List<OfficeView> officeViewList = new ArrayList<>();
 
-        OfficeView officeView = new OfficeView();
+//        OfficeView officeView = new OfficeView();
         officeView.isActive = true;
         officeView.name = "Офис 1";
         officeView.address = "Address 1";
@@ -28,8 +28,9 @@ public class OfficeServiceMock implements OfficeService {
     }
 
     @Override
-    public OfficeView getOfficeById(OfficeView officeView) {
+    public OfficeView getOfficeById(Long id) {
 
+        OfficeView officeView = new OfficeView();
         officeView.isActive = true;
         officeView.name = "Офис 1";
         officeView.address = "Address 1";
@@ -40,12 +41,12 @@ public class OfficeServiceMock implements OfficeService {
     }
 
     @Override
-    public String updateOffice(OfficeView officeView) {
-        return "success";
+    public ResultView updateOffice(OfficeView officeView) {
+        return null;
     }
 
     @Override
-    public String saveOffice(OfficeView officeView) {
-        return "success";
+    public ResultView saveOffice(OfficeView officeView) {
+        return null;
     }
 }

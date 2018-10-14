@@ -16,14 +16,12 @@ public class CountryServiceMock implements CountryService {
     }
 
     @Override
-//    public Set<CountryView> getCountries() {
-    public String getCountries() {
+    public Set<CountryView> getCountries() {
         Set<CountryView> countryViewSet = new HashSet<>();
         CountryView countryView = new CountryView();
         countryView.code = "643";
         countryView.name = "Russia";
         countryViewSet.add(countryView);
-//        return countryViewSet;
-        return "643";
+        return countryViewSet;
     }
 }

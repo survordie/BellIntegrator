@@ -2,7 +2,6 @@ package ru.bellintegrator.practice.country.dao;
 
 import ru.bellintegrator.practice.country.model.Country;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,9 +10,17 @@ import java.util.Set;
 public interface CountryDao {
 
     /**
-     *  Получить список всех стран
+     * Получить список всех стран
      *
      * @return
      */
-    public Set<Country> getAllCountries();
+    Set<Country> getAllCountries();
+
+    /**
+     * Получить данные страны по коду
+     *
+     * @param code
+     * @return
+     */
+    Country getCountryByCode(String code);
 }

@@ -22,7 +22,7 @@ public class OfficeController {
     }
 
     @PostMapping(value = "/list")
-    public List<OfficeView> getOffices(OfficeView officeView) {
+    public List<OfficeView> getOffices(@RequestBody OfficeView officeView) {
         return officeService.getOffices(officeView);
     }
 

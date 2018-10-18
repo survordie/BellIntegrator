@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpResponse;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
@@ -29,15 +28,10 @@ public class ResponseBodyAdviceImpl implements ResponseBodyAdvice<Object> {
 
         HttpServletResponse servletResponse = ((ServletServerHttpResponse) serverHttpResponse).getServletResponse();
 
-        if(servletResponse.getStatus() != 200){
-//            return new ResponseEntity<Object>("error: {" + ((LinkedHashMap<Integer, String>)body).get("message")+  "}", HttpStatus.INTERNAL_SERVER_ERROR);
-            return new String("error: {" + ((LinkedHashMap<Integer, String>)body).get("message")+  "}");
+        if (servletResponse.getStatus() != 200) {
+
+            return new String("error: {" + ((LinkedHashMap<Integer, String>) body).get("message") + "}");
         }
-        /*else{
-            if (body == null){
-                body = "result:success";
-            }
-        }*/
 
         return new Wrapper<Object>(body);
     }
@@ -54,7 +48,7 @@ public class ResponseBodyAdviceImpl implements ResponseBodyAdvice<Object> {
 
     public ResponseEntity<Object> createYourResponseBodyE_G_200(Object body) {
 
-        return new ResponseEntity<Object>(  "data: { result:success }", HttpStatus.OK);
+        return new ResponseEntity<Object>("data: { result:success }", HttpStatus.OK);
 
     }
 

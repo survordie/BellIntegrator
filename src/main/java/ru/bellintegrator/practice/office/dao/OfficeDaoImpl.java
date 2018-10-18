@@ -1,5 +1,6 @@
 package ru.bellintegrator.practice.office.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.practice.office.model.Office;
 
@@ -21,6 +22,7 @@ public class OfficeDaoImpl implements OfficeDao {
 
     private final EntityManager em;
 
+    @Autowired
     public OfficeDaoImpl(EntityManager em) {
         this.em = em;
     }
@@ -34,6 +36,7 @@ public class OfficeDaoImpl implements OfficeDao {
 
     @Override
     public Office getOfficeById(Long id) {
+
         return em.find(Office.class, id);
     }
 
@@ -43,7 +46,7 @@ public class OfficeDaoImpl implements OfficeDao {
 
         TypedQuery<Office> query = em.createQuery(criteriaQuery);
 
-        return query.getResultList().stream().collect(Collectors.toList());
+        return query.getResultList();
     }
 
     private CriteriaQuery<Office> buildQuery(Long orgId, String name, String phone, boolean isActive) {
@@ -73,7 +76,6 @@ public class OfficeDaoImpl implements OfficeDao {
 
     @Override
     public void saveOffice(Office office) {
-
         em.persist(office);
     }
 

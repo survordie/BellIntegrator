@@ -38,7 +38,7 @@ public class CountryDaoImpl implements CountryDao {
         CriteriaQuery<Country> criteria = buildCriteria(code);
         TypedQuery<Country> query = em.createQuery(criteria);
 
-        return ((Country) query.getSingleResult());
+        return query.getSingleResult();
     }
 
     private CriteriaQuery<Country> buildCriteria(String code) {

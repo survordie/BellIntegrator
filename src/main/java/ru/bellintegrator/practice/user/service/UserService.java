@@ -2,6 +2,7 @@ package ru.bellintegrator.practice.user.service;
 
 import ru.bellintegrator.practice.user.view.UserListView;
 import ru.bellintegrator.practice.user.view.UserView;
+import ru.bellintegrator.practice.utils.ResultView;
 
 import java.util.List;
 
@@ -15,11 +16,11 @@ public interface UserService {
      *
      * @return user
      */
-    UserView getUserById(long id);
+    UserView getUserById(Long id);
 
-    List<UserListView> getUserList(UserListView ulw);
+    List<UserListView> getUserList(UserListView userListView);
 
-    String updateUser(UserView user);
+    ResultView updateUser(UserView user);
 
-    void saveUser(UserView user);
+    ResultView saveUser(UserView user);
 }

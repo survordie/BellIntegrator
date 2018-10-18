@@ -22,7 +22,7 @@ public class Organization {
     /**
      * Страна
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country countryId;
 

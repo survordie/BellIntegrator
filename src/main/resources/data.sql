@@ -63,19 +63,19 @@ INSERT INTO Doc (id, version, doc_type_id, doc_number, doc_date)
 VALUES (6, 0, 10, '5605112233', '1986-01-21');
 
 INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (1, 0, 1, 6, 'Петя', 'Петров', '', 2,'', true);
+VALUES (1, 0, 1, 6, 'Петя', 'Петров', '', 'менеджер','', true);
 
 INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (2, 0, 2, 5, 'Вася', 'Васин', '', 3, '', true);
+VALUES (2, 0, 2, 5, 'Вася', 'Васин', '', 'менеджер', '', true);
 
 INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (3, 0, 3, 4, 'Сидор', 'Сидоров', '', 4,'', true);
+VALUES (3, 0, 3, 4, 'Сидор', 'Сидоров', '', 'специалист','', true);
 
 INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (4, 0, 4, 3, 'Варвара', 'Орлова', '', 5,'',  false);
+VALUES (4, 0, 4, 3, 'Варвара', 'Орлова', '', 'руководитель','',  false);
 
 INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (5, 0, 2, 2, 'Ваня', 'Иванов', '', 6,'', true);
+VALUES (5, 0, 2, 2, 'Ваня', 'Иванов', '', 'менеджер','', true);
 
 INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (6, 0, 1, 1, 'Коля', 'Николаев', '', 7,'', true);
+VALUES (6, 0, 1, 1, 'Коля', 'Николаев', '', 'специалист','', true);

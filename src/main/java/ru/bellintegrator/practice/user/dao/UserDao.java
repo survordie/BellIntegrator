@@ -26,10 +26,16 @@ public interface UserDao {
     /**
      * Получить User по фильтру
      *
-     * @param user
+     * @param officeId
+     * @param firstName
+     * @param secondName
+     * @param middleName
+     * @param position
+     * @param docCode
+     * @param citizenshipCode
      * @return
      */
-    User getUserByFilter(User user);
+    List<User> getUserByFilter(Long officeId, String firstName, String secondName, String middleName, String position, String docCode, String citizenshipCode);
 
     /**
      * Сохранить данные User
@@ -37,4 +43,11 @@ public interface UserDao {
      * @param user
      */
     void saveUser(User user);
+
+    /**
+     * Обновить данные User
+     *
+     * @param user
+     */
+    void updateUser(User user);
 }

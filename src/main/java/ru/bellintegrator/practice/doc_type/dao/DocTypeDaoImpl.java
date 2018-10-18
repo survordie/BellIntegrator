@@ -1,11 +1,14 @@
 package ru.bellintegrator.practice.doc_type.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.practice.doc_type.model.DocType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,6 +20,7 @@ public class DocTypeDaoImpl implements DocTypeDao {
 
     private final EntityManager em;
 
+    @Autowired
     public DocTypeDaoImpl(EntityManager em) {
         this.em = em;
     }
@@ -26,5 +30,26 @@ public class DocTypeDaoImpl implements DocTypeDao {
         TypedQuery<DocType> query = em.createQuery("SELECT dt FROM DocType dt", DocType.class);
 
         return query.getResultList().stream().collect(Collectors.toSet());
+    }
+
+    @Override
+    public DocType getDocTypeByCode(String code) {
+//        return em.find(DocType.class, id);
+        CriteriaQuery<DocType> criteriaQuery = buildQuery(code);
+        TypedQuery<DocType> query = em.createQuery(criteriaQuery);
+
+        DocType docType = query.getSingleResult();
+        return query.getSingleResult();
+    }
+
+    private CriteriaQuery<DocType> buildQuery(String code) {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<DocType> criteriaQuery = builder.createQuery(DocType.class);
+
+        Root<DocType> root = criteriaQuery.from(DocType.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(builder.equal(root.get("code"), code));
+
+        return criteriaQuery;
     }
 }

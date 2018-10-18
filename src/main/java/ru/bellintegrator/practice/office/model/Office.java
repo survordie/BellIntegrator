@@ -22,7 +22,7 @@ public class Office {
     /**
      * Идентификатор организации
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")
     private Organization organizationId;
 

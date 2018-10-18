@@ -19,6 +19,7 @@ public class DocTypeServiceImpl implements DocTypeService {
     private final DocTypeDao docTypeDao;
 
     public DocTypeServiceImpl(DocTypeDao docTypeDao) {
+
         this.docTypeDao = docTypeDao;
     }
 

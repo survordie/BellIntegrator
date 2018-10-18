@@ -5,15 +5,17 @@ import ru.bellintegrator.practice.office.model.Office;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "User")
 public class User {
 
     @Id
-    @GeneratedValue
-    @Column(name = "Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     /**
@@ -26,15 +28,15 @@ public class User {
      * Идентификатор офиса
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "office_id", nullable = false)
+    @JoinColumn(name = "office_id")
     private Office officeId;
 
     /**
      * Идентификатор документа
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "doc_id", nullable = false)
-    private List<Doc> docId;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "doc_id")// было nullable=false и выдавало ошибку. Сейчас ошибка другая
+    private Set<Doc> docId = new HashSet<>();
 
     /**
      * Имя
@@ -58,7 +60,7 @@ public class User {
      * Позиция
      */
     @Column(name = "position", nullable = false)
-    private int position;
+    private String position;
 
     /**
      * Телефон
@@ -79,7 +81,7 @@ public class User {
 
     }
 
-    public User(Office officeId, List<Doc> docId, String firstName, String secondName, String middleName, int position, String phone, String citizenshipName, int citizenshipCode, boolean isIdentified) {
+    public User(Office officeId, Set<Doc> docId, String firstName, String secondName, String middleName, String position, String phone, boolean isIdentified) {
         this.officeId = officeId;
         this.docId = docId;
         this.firstName = firstName;
@@ -94,6 +96,10 @@ public class User {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Office getOfficeId() {
         return officeId;
     }
@@ -102,19 +108,12 @@ public class User {
         this.officeId = officeId;
     }
 
-    public List<Doc> getDocId() {
-        if (docId != null) {
-            docId = new ArrayList<>();
-        }
+    public Set<Doc> getDocId() {
         return docId;
     }
 
-    public void addDocId(Doc docId) {
-        getDocId().add(docId);
-    }
-
-    public void removeDocId(Doc docId) {
-        getDocId().remove(docId);
+    public void setDocId(Set<Doc> docId) {
+        this.docId = docId;
     }
 
     public String getFirstName() {
@@ -141,11 +140,11 @@ public class User {
         this.middleName = middleName;
     }
 
-    public int getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 
@@ -163,5 +162,20 @@ public class User {
 
     public void setIdentified(boolean identified) {
         isIdentified = identified;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", officeId=" + officeId +
+                ", docId=" + docId +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", position='" + position + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isIdentified=" + isIdentified +
+                '}';
     }
 }

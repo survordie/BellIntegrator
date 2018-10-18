@@ -2,7 +2,6 @@ package ru.bellintegrator.practice.doc_type.dao;
 
 import ru.bellintegrator.practice.doc_type.model.DocType;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,4 +15,11 @@ public interface DocTypeDao {
      * @return
      */
     Set<DocType> getAllDocTypes();
+
+    /**
+     * Получить тип документа по коду
+     *
+     * @return
+     */
+    DocType getDocTypeByCode(String code);
 }

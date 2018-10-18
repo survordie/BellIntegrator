@@ -21,14 +21,12 @@ public class Country {
     /**
      * Наименование страны
      */
-    @NotNull
     @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * Код страны
      */
-    @NotNull
     @Column(name = "code", nullable = false)
     private String code;
 

@@ -1,5 +1,7 @@
 package ru.bellintegrator.practice.doc_type.model;
 
+import org.hibernate.annotations.Immutable;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,8 +9,8 @@ import javax.persistence.*;
 public class DocType {
 
     @Id
-    @GeneratedValue
-    @Column(name = "Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     /**
@@ -20,7 +22,7 @@ public class DocType {
     /**
      * Код документа
      */
-    @Column(name = "code")
+    @Column(name = "code", length = 3)
     private String code;
 
     /**
@@ -45,6 +47,10 @@ public class DocType {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getCode() {
         return code;
     }
@@ -59,5 +65,14 @@ public class DocType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "DocType{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

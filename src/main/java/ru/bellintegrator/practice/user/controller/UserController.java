@@ -5,13 +5,14 @@ import org.springframework.web.bind.annotation.*;
 import ru.bellintegrator.practice.user.service.UserService;
 import ru.bellintegrator.practice.user.view.UserListView;
 import ru.bellintegrator.practice.user.view.UserView;
+import ru.bellintegrator.practice.utils.ResultView;
 
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(value = "/api/user", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/user")
 public class UserController {
 
     private final UserService userService;
@@ -22,22 +23,22 @@ public class UserController {
     }
 
     @PostMapping(value = "/list")
-    public List<UserListView> getUserList(@RequestBody UserListView ulw) {
-        return userService.getUserList(ulw);
+    public List<UserListView> getUserList(@RequestBody UserListView userListView) {
+        return userService.getUserList(userListView);
     }
 
     @GetMapping(value = "/{id}")
-    public UserView getUserById(@PathVariable long id) {
+    public UserView getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @PostMapping(value = "/update")
-    public String updateUser(@RequestBody UserView user) {
+    public ResultView updateUser(@RequestBody UserView user) {
         return userService.updateUser(user);
     }
 
     @PostMapping(value = "/save")
-    public void saveUser(@RequestBody UserView user) {
-        userService.saveUser(user);
+    public ResultView saveUser(@RequestBody UserView user) {
+        return userService.saveUser(user);
     }
 }

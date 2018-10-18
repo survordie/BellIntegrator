@@ -47,11 +47,11 @@ CREATE TABLE IF NOT EXISTS User (
 	id                  BIGINT  PRIMARY KEY AUTO_INCREMENT,
 	version    			INTEGER NOT NULL,
 	office_id           BIGINT NOT NULL,
-	doc_id              BIGINT NOT NULL,
+	doc_id              BIGINT,
 	first_name 			VARCHAR(50) NOT NULL,
 	second_name			VARCHAR(50),
 	middle_name			VARCHAR(50),
-	position			INTEGER NOT NULL,
+	position			VARCHAR(50) NOT NULL,
 	phone				VARCHAR(20),
 	is_identified 		BOOLEAN
 );

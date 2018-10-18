@@ -41,37 +41,45 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserByFilter(User user) {
-        CriteriaQuery<User> criteriaQuery = builderQuery(user);
+    public List<User> getUserByFilter(Long officeId, String firstName, String secondName, String middleName, String position, String docCode, String citizenshipCode) {
+        CriteriaQuery<User> criteriaQuery = builderQuery(officeId, firstName, secondName, middleName, position, docCode, citizenshipCode);
 
         TypedQuery<User> query = em.createQuery(criteriaQuery);
 
-        return query.getSingleResult();
+        return query.getResultList();
     }
 
-    private CriteriaQuery<User> builderQuery(User user) {
+    private CriteriaQuery<User> builderQuery(Long officeId, String firstName, String secondName, String middleName, String position, String docCode, String citizenshipCode) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> userRoot = criteriaQuery.from(User.class);
         criteriaQuery.select(userRoot);
         List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("officeId"), user.getOfficeId()));
+        predicateList.add(criteriaBuilder.equal(userRoot.get("officeId"), officeId));
 
-        if (!user.getFirstName().isEmpty()) {
-            predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("firstName"), user.getFirstName()));
+        if (firstName != null) {
+            predicateList.add(criteriaBuilder.equal(userRoot.get("firstName"), firstName));
         }
 
-        if (!user.getSecondName().isEmpty()) {
-            predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("firstName"), user.getSecondName()));
+        if (secondName != null) {
+            predicateList.add(criteriaBuilder.equal(userRoot.get("secondName"), secondName));
         }
 
-        if (!user.getMiddleName().isEmpty()) {
-            predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("middleName"), user.getMiddleName()));
+        if (middleName != null) {
+            predicateList.add(criteriaBuilder.equal(userRoot.get("middleName"), middleName));
         }
 
-        if (user.getPosition() != 0) {
-            predicateList.add(criteriaBuilder.equal(userRoot.get("user").get("position"), user.getPosition()));
+        if (position != null) {
+            predicateList.add(criteriaBuilder.equal(userRoot.get("position"), position));
+        }
+
+        if (docCode != null) {
+            predicateList.add(criteriaBuilder.equal(userRoot.get("docCode"), docCode));
+        }
+
+        if (citizenshipCode != null) {
+            predicateList.add(criteriaBuilder.equal(userRoot.get("citizenshipCode"), citizenshipCode));
         }
 
         criteriaQuery.where(predicateList.toArray(new Predicate[]{}));
@@ -80,6 +88,23 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
+
         em.persist(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        User u = em.find(User.class, user.getId());
+
+        if (u != null) {
+            u.setFirstName(user.getFirstName());
+            u.setMiddleName(user.getMiddleName());
+            u.setSecondName(user.getSecondName());
+            u.setPosition(user.getPosition());
+            u.setOfficeId(user.getOfficeId());
+            u.setPhone(user.getPhone());
+            u.setIdentified(user.isIdentified());
+        }
+        em.flush();
     }
 }

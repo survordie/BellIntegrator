@@ -4,13 +4,14 @@ import ru.bellintegrator.practice.doc_type.model.DocType;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Doc")
 public class Doc {
     @Id
-    @GeneratedValue
-    @Column(name = "Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     /**
@@ -22,7 +23,7 @@ public class Doc {
     /**
      * Код типа документа
      */
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "doc_type_id")
     private DocType docCode;
 
@@ -55,6 +56,10 @@ public class Doc {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public DocType getDocCode() {
         return docCode;
     }
@@ -77,5 +82,30 @@ public class Doc {
 
     public void setDocDate(Date docDate) {
         this.docDate = docDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Doc{" +
+                "id=" + id +
+                ", docNumber='" + docNumber + '\'' +
+                ", docDate=" + docDate +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Doc doc = (Doc) o;
+        return Objects.equals(getDocCode(), doc.getDocCode()) &&
+                Objects.equals(getDocNumber(), doc.getDocNumber()) &&
+                Objects.equals(getDocDate(), doc.getDocDate());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getDocCode(), getDocNumber(), getDocDate());
     }
 }

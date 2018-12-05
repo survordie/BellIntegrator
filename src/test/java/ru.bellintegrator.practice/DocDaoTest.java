@@ -31,12 +31,12 @@ public class DocDaoTest {
 
     @Test
     public void saveDocTest(){
-        Date date = Calendar.getInstance().getTime();
-        DocType docType = docTypeDao.getDocTypeByCode("21");
-        Doc doc = new Doc(docType, "234", date);
-
-        docDao.saveDocument(doc);
-
-        System.out.println(doc);
+//        Date date = Calendar.getInstance().getTime();
+//        DocType docType = docTypeDao.getDocTypeByCode("21");
+//        Doc doc = new Doc(docType, "234", date);
+//
+//        docDao.saveDocument(doc);
+//
+//        System.out.println(doc);
     }
 }

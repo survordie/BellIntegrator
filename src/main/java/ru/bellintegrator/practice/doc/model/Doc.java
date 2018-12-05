@@ -1,6 +1,7 @@
 package ru.bellintegrator.practice.doc.model;
 
 import ru.bellintegrator.practice.doc_type.model.DocType;
+import ru.bellintegrator.practice.user.model.User;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -23,9 +24,13 @@ public class Doc {
     /**
      * Код типа документа
      */
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "doc_type_id")
     private DocType docCode;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
 
     /**
      * Номер документа
@@ -46,8 +51,9 @@ public class Doc {
 
     }
 
-    public Doc(DocType docCode, String docNumber, Date docDate) {
+    public Doc(DocType docCode, User userId, String docNumber, Date docDate) {
         this.docCode = docCode;
+        this.userId = userId;
         this.docNumber = docNumber;
         this.docDate = docDate;
     }
@@ -84,6 +90,14 @@ public class Doc {
         this.docDate = docDate;
     }
 
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
         return "Doc{" +
@@ -98,14 +112,15 @@ public class Doc {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Doc doc = (Doc) o;
-        return Objects.equals(getDocCode(), doc.getDocCode()) &&
-                Objects.equals(getDocNumber(), doc.getDocNumber()) &&
-                Objects.equals(getDocDate(), doc.getDocDate());
+        return Objects.equals(docCode, doc.docCode) &&
+                Objects.equals(userId, doc.userId) &&
+                Objects.equals(docNumber, doc.docNumber) &&
+                Objects.equals(docDate, doc.docDate);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(getDocCode(), getDocNumber(), getDocDate());
+        return Objects.hash(docCode, userId, docNumber, docDate);
     }
 }

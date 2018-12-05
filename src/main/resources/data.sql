@@ -44,38 +44,38 @@ INSERT INTO Doc_Type (id, version, code, name) VALUES (12, 0, '24', 'Удост�
 
 INSERT INTO Doc_Type (id, version, code, name) VALUES (13, 0, '91', 'Иные документы');
 
-INSERT INTO Doc (id, version, doc_type_id, doc_number, doc_date)
-VALUES (1, 0, 10, '5600112233', '1980-01-21');
+INSERT INTO User (id, version, office_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (1, 0, 1, 'Петя', 'Петров', '', 'менеджер','', true);
 
-INSERT INTO Doc (id, version, doc_type_id, doc_number, doc_date)
-VALUES (2, 0, 10, '5601112233', '1982-01-21');
+INSERT INTO User (id, version, office_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (2, 0, 2, 'Вася', 'Васин', '', 'менеджер', '', true);
 
-INSERT INTO Doc (id, version, doc_type_id, doc_number, doc_date)
-VALUES (3, 0, 10, '5602112233', '1983-01-21');
+INSERT INTO User (id, version, office_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (3, 0, 3, 'Сидор', 'Сидоров', '', 'специалист','', true);
 
-INSERT INTO Doc (id, version, doc_type_id, doc_number, doc_date)
-VALUES (4, 0, 10, '5603112233', '1984-01-21');
+INSERT INTO User (id, version, office_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (4, 0, 4, 'Варвара', 'Орлова', '', 'руководитель','',  false);
 
-INSERT INTO Doc (id, version, doc_type_id, doc_number, doc_date)
-VALUES (5, 0, 10, '5604112233', '1985-01-21');
+INSERT INTO User (id, version, office_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (5, 0, 2, 'Ваня', 'Иванов', '', 'менеджер','', true);
 
-INSERT INTO Doc (id, version, doc_type_id, doc_number, doc_date)
-VALUES (6, 0, 10, '5605112233', '1986-01-21');
+INSERT INTO User (id, version, office_id, first_name, second_name, middle_name, position, phone, is_identified)
+VALUES (6, 0, 1, 'Коля', 'Николаев', '', 'специалист','', true);
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (1, 0, 1, 6, 'Петя', 'Петров', '', 'менеджер','', true);
+INSERT INTO Doc (id, version, doc_type_id, user_id, doc_number, doc_date)
+VALUES (1, 0, 10, 1, '5600112233', '1980-01-21');
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (2, 0, 2, 5, 'Вася', 'Васин', '', 'менеджер', '', true);
+INSERT INTO Doc (id, version, doc_type_id, user_id, doc_number, doc_date)
+VALUES (2, 0, 10, 2, '5601112233', '1982-01-21');
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (3, 0, 3, 4, 'Сидор', 'Сидоров', '', 'специалист','', true);
+INSERT INTO Doc (id, version, doc_type_id, user_id, doc_number, doc_date)
+VALUES (3, 0, 10, 3, '5602112233', '1983-01-21');
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (4, 0, 4, 3, 'Варвара', 'Орлова', '', 'руководитель','',  false);
+INSERT INTO Doc (id, version, doc_type_id, user_id, doc_number, doc_date)
+VALUES (4, 0, 10, 4, '5603112233', '1984-01-21');
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (5, 0, 2, 2, 'Ваня', 'Иванов', '', 'менеджер','', true);
+INSERT INTO Doc (id, version, doc_type_id, user_id, doc_number, doc_date)
+VALUES (5, 0, 10, 5, '5604112233', '1985-01-21');
 
-INSERT INTO User (id, version, office_id, doc_id, first_name, second_name, middle_name, position, phone, is_identified)
-VALUES (6, 0, 1, 1, 'Коля', 'Николаев', '', 'специалист','', true);
+INSERT INTO Doc (id, version, doc_type_id, user_id, doc_number, doc_date)
+VALUES (6, 0, 10, 6, '5605112233', '1986-01-21');

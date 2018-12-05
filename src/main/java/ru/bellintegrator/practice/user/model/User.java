@@ -4,9 +4,7 @@ import ru.bellintegrator.practice.doc.model.Doc;
 import ru.bellintegrator.practice.office.model.Office;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,8 +32,7 @@ public class User {
     /**
      * Идентификатор документа
      */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "doc_id")// было nullable=false и выдавало ошибку. Сейчас ошибка другая
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Doc> docId = new HashSet<>();
 
     /**
@@ -81,9 +78,8 @@ public class User {
 
     }
 
-    public User(Office officeId, Set<Doc> docId, String firstName, String secondName, String middleName, String position, String phone, boolean isIdentified) {
+    public User(Office officeId, String firstName, String secondName, String middleName, String position, String phone, boolean isIdentified) {
         this.officeId = officeId;
-        this.docId = docId;
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;

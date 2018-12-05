@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS Doc (
 	id          BIGINT  PRIMARY KEY AUTO_INCREMENT,
 	version     INTEGER NOT NULL,
 	doc_type_id BIGINT NOT NULL,
+	user_id     BIGINT NOT NULL,
     doc_number	VARCHAR(50),
     doc_date	DATE
 );
@@ -47,7 +48,6 @@ CREATE TABLE IF NOT EXISTS User (
 	id                  BIGINT  PRIMARY KEY AUTO_INCREMENT,
 	version    			INTEGER NOT NULL,
 	office_id           BIGINT NOT NULL,
-	doc_id              BIGINT,
 	first_name 			VARCHAR(50) NOT NULL,
 	second_name			VARCHAR(50),
 	middle_name			VARCHAR(50),
@@ -65,8 +65,8 @@ ALTER TABLE Office ADD FOREIGN KEY (organization_id) REFERENCES Organization(id)
 CREATE INDEX IX_User_office_id ON User(office_id);
 ALTER TABLE User ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 
-CREATE INDEX IX_User_doc_id ON User(doc_id);
-ALTER TABLE User ADD FOREIGN KEY (doc_id) REFERENCES Doc(id);
+CREATE INDEX IX_Doc_user_id ON Doc(user_id);
+ALTER TABLE Doc ADD FOREIGN KEY (user_id) REFERENCES User(id);
 
 CREATE INDEX IX_Doc_doc_type_id ON Doc(doc_type_id);
 ALTER TABLE Doc ADD FOREIGN KEY (doc_type_id) REFERENCES Doc_Type(id);

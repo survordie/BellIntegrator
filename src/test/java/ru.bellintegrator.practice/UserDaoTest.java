@@ -40,17 +40,18 @@ public class UserDaoTest {
 
     @Test
     public void saveUserTest(){
-        Date date = Calendar.getInstance().getTime();
-        DocType docType = docTypeDao.getDocTypeByCode("23");
-        Office office = officeDao.getOfficeById(1L);
-        Doc doc = new Doc(docType, "234", date);
-        Set<Doc> docList = new HashSet<>();
-        docList.add(doc);
-
-        User user = new User(office, docList, "dsfg","","","","", true);
-
-        userDao.saveUser(user);
-
-        System.out.println(user);
+//        Date date = Calendar.getInstance().getTime();
+//        DocType docType = docTypeDao.getDocTypeByCode("23");
+//        Office office = officeDao.getOfficeById(1L);
+//        User user = new User(office, "dsfg","","","","", true);
+//        Doc doc = new Doc(docType,user, "234", date);
+//        Set<Doc> docList = new HashSet<>();
+//        docList.add(doc);
+//
+//
+//
+//        userDao.saveUser(user);
+//
+//        System.out.println(user);
     }
 }

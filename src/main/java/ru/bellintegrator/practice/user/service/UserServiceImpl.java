@@ -20,7 +20,8 @@ import ru.bellintegrator.practice.user.view.UserListView;
 import ru.bellintegrator.practice.user.view.UserView;
 import ru.bellintegrator.practice.utils.ResultView;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 @Service
 @Primary
@@ -75,24 +76,24 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public ResultView saveUser(UserView userView) {
 
-        /*User user = mapReverseUser(userView);
+        User user = mapReverseUser(userView);
         Office office = officeDao.getOfficeById(userView.officeId);
         DocType docType = docTypeDao.getDocTypeByCode(userView.docCode);
 
-        Doc doc = new Doc(docType, userView.docNumber, userView.docDate);
+        Doc doc = new Doc(docType, user, userView.docNumber, userView.docDate);
         Set<Doc> docList = user.getDocId();
         docList.add(doc);
         user.setOfficeId(office);
-        user.setDocId(docList);*/
+        user.setDocId(docList);
 
-        Date date = Calendar.getInstance().getTime();
+        /*Date date = Calendar.getInstance().getTime();
         DocType docType = docTypeDao.getDocTypeByCode("23");
         Office office = officeDao.getOfficeById(1L);
-        Doc doc = new Doc(docType, "234", date);
+        User user = new User(office, "dsfg", "", "", "", "", true);
+        Doc doc = new Doc(docType, user, "234", date);
         Set<Doc> docList = new HashSet<>();
-        docList.add(doc);
+        docList.add(doc);*/
 
-        User user = new User(office, docList, "dsfg","","","","", true);
 
         log.debug(user.toString());
         userDao.saveUser(user);

@@ -23,14 +23,12 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
-@Primary
 public class OrganizationServiceImpl implements OrganizationService {
 
     private final OrganizationDao organizationDao;
     private final CountryDao countryDao;
     private static final String OK = "result\": \"success";
 
-    @Autowired
     public OrganizationServiceImpl(OrganizationDao organizationDao, CountryDao countryDao) {
         this.organizationDao = organizationDao;
         this.countryDao = countryDao;

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.practice.office.model.Office;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -83,12 +84,14 @@ public class OfficeDaoImpl implements OfficeDao {
     public void updateOffice(Office office) {
         Office of = em.find(Office.class, office.getId());
 
-        if(of != null){
+        if (of != null) {
             of.setName(office.getName());
             of.setOrganizationId(office.getOrganizationId());
             of.setAddress(office.getAddress());
             of.setPhone(office.getPhone());
             of.setIsActive(office.getIsActive());
+        } else {
+            throw new IllegalArgumentException("office for update not found!");
         }
         em.flush();
     }

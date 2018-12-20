@@ -3,6 +3,8 @@ package ru.bellintegrator.practice.office.service;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -14,11 +16,15 @@ import ru.bellintegrator.practice.office.view.OfficeView;
 import ru.bellintegrator.practice.organization.dao.OrganizationDao;
 import ru.bellintegrator.practice.utils.ResultView;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
+
 
 @Service
 @Primary
 public class OfficeServiceImpl implements OfficeService {
+
+    private Logger log = LoggerFactory.getLogger(getClass());
 
     private final OfficeDao officeDao;
     private final OrganizationDao organizationDao;
@@ -51,7 +57,6 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
 
-
     @Override
     @Transactional
     public ResultView updateOffice(OfficeView officeView) {
@@ -60,9 +65,10 @@ public class OfficeServiceImpl implements OfficeService {
             Office office = reverseMapOffice(officeView);
             office.setOrganizationId(organizationDao.getOrganizationById(officeView.organizationId));
 
+            log.debug(office.toString());
             officeDao.updateOffice(office);
-        } else{
-            throw new DataIntegrityViolationException(officeView.id + "not found");
+        } else {
+            throw new DataIntegrityViolationException("Office id:" + officeView.id + " not found");
         }
         return new ResultView();
     }
@@ -74,6 +80,7 @@ public class OfficeServiceImpl implements OfficeService {
         Office office = reverseMapOffice(officeView);
         office.setOrganizationId(organizationDao.getOrganizationById(officeView.organizationId));
 
+        log.debug(office.toString());
         officeDao.saveOffice(office);
 
         return new ResultView();

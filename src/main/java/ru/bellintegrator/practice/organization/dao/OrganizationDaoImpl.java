@@ -35,6 +35,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
 
     @Override
     public Organization getOrganizationById(Long id) {
+
         return em.find(Organization.class, id);
     }
 
@@ -61,7 +62,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
             predicateList.add(criteriaBuilder.equal(organizationRoot.get("inn"), inn));
         }
 
-        if(isActive){
+        if (isActive) {
             predicateList.add(criteriaBuilder.equal(organizationRoot.get("isActive"), isActive));
         }
 
@@ -79,7 +80,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
     public void updateOrganization(Organization organization) {
 
         Organization org = em.find(Organization.class, organization.getId());
-        if(org != null) {
+        if (org != null) {
             org.setCountryId(organization.getCountryId());
             org.setName(organization.getName());
             org.setPhone(organization.getPhone());

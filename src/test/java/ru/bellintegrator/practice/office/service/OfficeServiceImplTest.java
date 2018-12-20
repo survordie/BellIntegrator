@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -16,6 +17,8 @@ import ru.bellintegrator.practice.organization.dao.OrganizationDao;
 import ru.bellintegrator.practice.organization.model.Organization;
 import ru.bellintegrator.practice.utils.ResultView;
 
+import javax.persistence.EntityExistsException;
+import javax.persistence.TransactionRequiredException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +86,13 @@ public class OfficeServiceImplTest {
         officeDao.updateOffice(office);
     }
 
-    @Test
-    public void saveOffice() {
+    @Test(expected = EntityExistsException.class)
+    public void saveOfficeThrow1() {
+        Mockito.doThrow(new EntityExistsException("office already exists"))
+                .when(officeDao)
+                .saveOffice(office);
+
+        officeDao.saveOffice(office);
     }
+
 }

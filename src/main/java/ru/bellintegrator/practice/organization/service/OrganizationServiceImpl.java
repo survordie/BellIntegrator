@@ -3,9 +3,8 @@ package ru.bellintegrator.practice.organization.service;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import org.hibernate.exception.DataException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,14 +15,17 @@ import ru.bellintegrator.practice.organization.view.OrganizationListView;
 import ru.bellintegrator.practice.organization.view.OrganizationView;
 import ru.bellintegrator.practice.utils.ResultView;
 
-import java.sql.SQLException;
+import javax.persistence.EntityExistsException;
 import java.util.List;
+
 
 /**
  * {@inheritDoc}
  */
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
+
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final OrganizationDao organizationDao;
     private final CountryDao countryDao;
@@ -71,6 +73,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         Organization organization = reverseMapOrganization(view);
         organization.setCountryId(countryDao.getCountryByCode(view.countryId));
 
+        log.debug(organization.toString());
         organizationDao.saveOrganization(organization);
 
         return new ResultView();
@@ -84,9 +87,10 @@ public class OrganizationServiceImpl implements OrganizationService {
             Organization organization = reverseMapOrganization(view);
             organization.setCountryId(countryDao.getCountryByCode(view.countryId));
 
+            log.debug(organization.toString());
             organizationDao.updateOrganization(organization);
-        } else{
-            throw new DataIntegrityViolationException(view.id + "not found");
+        } else {
+            throw new DataIntegrityViolationException("Organization with id: " + view.id + "not found");
         }
         return new ResultView();
     }

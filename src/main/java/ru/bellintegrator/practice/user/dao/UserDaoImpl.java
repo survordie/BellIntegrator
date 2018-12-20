@@ -104,6 +104,8 @@ public class UserDaoImpl implements UserDao {
             u.setOfficeId(user.getOfficeId());
             u.setPhone(user.getPhone());
             u.setIdentified(user.isIdentified());
+        } else {
+            throw new IllegalArgumentException("user id:" + user.getId() + " for update not found!");
         }
         em.flush();
     }

@@ -6,6 +6,7 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Primary;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bellintegrator.practice.doc.dao.DocDao;
@@ -20,6 +21,7 @@ import ru.bellintegrator.practice.user.view.UserListView;
 import ru.bellintegrator.practice.user.view.UserView;
 import ru.bellintegrator.practice.utils.ResultView;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
 import java.util.Set;
 
@@ -68,8 +70,26 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public ResultView updateUser(UserView user) {
-        return null;
+    @Transactional
+    public ResultView updateUser(UserView userView) {
+
+        if (userDao.getUserById(userView.id) != null) {
+            User user = mapReverseUser(userView);
+            Office office = officeDao.getOfficeById(userView.officeId);
+            DocType docType = docTypeDao.getDocTypeByCode(userView.docCode);
+
+            Doc doc = new Doc(docType, user, userView.docNumber, userView.docDate);
+            Set<Doc> docList = user.getDocId();
+            docList.add(doc);
+            user.setOfficeId(office);
+            user.setDocId(docList);
+
+            log.debug(user.toString());
+            userDao.updateUser(user);
+        } else {
+            throw new DataIntegrityViolationException("User id: " + userView.id + " not found");
+        }
+        return new ResultView();
     }
 
     @Override
@@ -85,15 +105,6 @@ public class UserServiceImpl implements UserService {
         docList.add(doc);
         user.setOfficeId(office);
         user.setDocId(docList);
-
-        /*Date date = Calendar.getInstance().getTime();
-        DocType docType = docTypeDao.getDocTypeByCode("23");
-        Office office = officeDao.getOfficeById(1L);
-        User user = new User(office, "dsfg", "", "", "", "", true);
-        Doc doc = new Doc(docType, user, "234", date);
-        Set<Doc> docList = new HashSet<>();
-        docList.add(doc);*/
-
 
         log.debug(user.toString());
         userDao.saveUser(user);
@@ -123,7 +134,7 @@ public class UserServiceImpl implements UserService {
 
     private User mapReverseUser(UserView userView) {
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-        mapperFactory.classMap(UserView.class, User.class).mapNulls(false).exclude("officeId").exclude("id").byDefault().register();
+        mapperFactory.classMap(UserView.class, User.class).mapNulls(false).byDefault().register();
         MapperFacade mapperFacade = mapperFactory.getMapperFacade();
 
         User user = mapperFacade.map(userView, User.class);

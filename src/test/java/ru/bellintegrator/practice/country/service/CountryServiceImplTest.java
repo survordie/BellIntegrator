@@ -1,6 +1,7 @@
 package ru.bellintegrator.practice.country.service;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -13,30 +14,36 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RunWith(SpringRunner.class)
-//@SpringBootTest
 public class CountryServiceImplTest {
+
+    private Country country;
 
     @MockBean
     private CountryDaoImpl countryDao;
+
+    @Before
+    public void setUp() throws Exception {
+        country = new Country("РФ", "643");
+    }
 
     @Test
     public void getCountries() {
 
         Set<Country> countryStub = new HashSet<Country>();
-        countryStub.add(new Country("РФ", "643"));
+        countryStub.add(country);
 
         Mockito.doReturn(countryStub)
                 .when(countryDao)
                 .getAllCountries();
-//        Set<Country> countrySet = countryDao.getAllCountries();
+        Set<Country> countrySet = countryDao.getAllCountries();
 
-        Assert.assertNotNull(countryDao.getAllCountries());
+        Assert.assertNotNull(countrySet);
     }
 
     @Test
     public void getCountryByCodeTest() {
 
-        Mockito.doReturn(new Country("РФ", "643"))
+        Mockito.doReturn(country)
                 .when(countryDao)
                 .getCountryByCode("643");
 

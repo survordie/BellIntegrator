@@ -48,7 +48,7 @@ public class Office {
      * Офис работает?
      */
     @Column(name = "is_active")
-    private String isActive;
+    private boolean isActive;
 
     /**
      * Конструктор для hibernate
@@ -57,13 +57,14 @@ public class Office {
 
     }
 
-    public Office(Organization organizationId, String name, String address, String phone, String isActive) {
+    public Office(Organization organizationId, String name, String address, String phone, boolean isActive) {
         this.organizationId = organizationId;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.isActive = isActive;
     }
+
 
     public Long getId() {
         return id;
@@ -105,11 +106,11 @@ public class Office {
         this.phone = phone;
     }
 
-    public String getIsActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(String isActive) {
+    public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
 

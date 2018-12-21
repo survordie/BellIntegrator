@@ -19,6 +19,8 @@ public interface DocTypeDao {
     /**
      * Получить тип документа по коду
      *
+     * @param code
+     *
      * @return
      */
     DocType getDocTypeByCode(String code);

@@ -25,6 +25,9 @@ public class DocTypeDaoImpl implements DocTypeDao {
         this.em = em;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<DocType> getAllDocTypes() {
         TypedQuery<DocType> query = em.createQuery("SELECT dt FROM DocType dt", DocType.class);
@@ -32,6 +35,9 @@ public class DocTypeDaoImpl implements DocTypeDao {
         return query.getResultList().stream().collect(Collectors.toSet());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocType getDocTypeByCode(String code) {
 //        return em.find(DocType.class, id);

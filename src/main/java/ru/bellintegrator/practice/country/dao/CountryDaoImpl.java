@@ -25,6 +25,9 @@ public class CountryDaoImpl implements CountryDao {
         this.em = em;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Country> getAllCountries() {
         TypedQuery<Country> query = em.createQuery("SELECT c FROM Country c", Country.class);
@@ -32,6 +35,9 @@ public class CountryDaoImpl implements CountryDao {
         return query.getResultList().stream().collect(Collectors.toSet());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Country getCountryByCode(String code) {
 

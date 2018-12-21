@@ -18,12 +18,14 @@ public interface DocDao {
 
     /**
      * Сохранить данные нового документа
+     *
      * @param doc
      */
     void saveDocument(Doc doc);
 
     /**
      * Обновить данные нового документа
+     *
      * @param doc
      */
     void updateDocument(Doc doc);

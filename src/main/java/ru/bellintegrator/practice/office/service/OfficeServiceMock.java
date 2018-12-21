@@ -1,6 +1,5 @@
 package ru.bellintegrator.practice.office.service;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.office.view.OfficeView;
 import ru.bellintegrator.practice.utils.ResultView;

@@ -1,7 +1,5 @@
 package ru.bellintegrator.practice.doc_type.model;
 
-import org.hibernate.annotations.Immutable;
-
 import javax.persistence.*;
 
 @Entity

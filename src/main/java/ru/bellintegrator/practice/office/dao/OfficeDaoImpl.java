@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.practice.office.model.Office;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,7 +12,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * {@inheritDoc}
@@ -28,6 +26,9 @@ public class OfficeDaoImpl implements OfficeDao {
         this.em = em;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Office> getAllOffices() {
         TypedQuery<Office> query = em.createQuery("SELECT o FROM Office o", Office.class);
@@ -35,12 +36,18 @@ public class OfficeDaoImpl implements OfficeDao {
         return query.getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Office getOfficeById(Long id) {
 
         return em.find(Office.class, id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Office> getOfficeByFilter(Long orgId, String name, String phone, boolean isActive) {
         CriteriaQuery<Office> criteriaQuery = buildQuery(orgId, name, phone, isActive);

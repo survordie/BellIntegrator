@@ -16,18 +16,18 @@ import ru.bellintegrator.practice.office.view.OfficeView;
 import ru.bellintegrator.practice.organization.dao.OrganizationDao;
 import ru.bellintegrator.practice.utils.ResultView;
 
-import javax.persistence.EntityExistsException;
 import java.util.List;
 
-
+/**
+ * {@inheritDoc}
+ */
 @Service
 @Primary
 public class OfficeServiceImpl implements OfficeService {
 
-    private Logger log = LoggerFactory.getLogger(getClass());
-
     private final OfficeDao officeDao;
     private final OrganizationDao organizationDao;
+    private Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     public OfficeServiceImpl(OfficeDao officeDao, OrganizationDao organizationDao) {
@@ -35,6 +35,9 @@ public class OfficeServiceImpl implements OfficeService {
         this.organizationDao = organizationDao;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public List<OfficeView> getOffices(OfficeView officeView) {
@@ -45,6 +48,9 @@ public class OfficeServiceImpl implements OfficeService {
         return officeViewList;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public OfficeView getOfficeById(Long id) {
@@ -56,7 +62,9 @@ public class OfficeServiceImpl implements OfficeService {
         return view;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public ResultView updateOffice(OfficeView officeView) {
@@ -73,6 +81,9 @@ public class OfficeServiceImpl implements OfficeService {
         return new ResultView();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public ResultView saveOffice(OfficeView officeView) {

@@ -2,6 +2,7 @@ package ru.bellintegrator.practice.user.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.bellintegrator.practice.user.model.User;
 
 import javax.persistence.EntityManager;
@@ -26,7 +27,11 @@ public class UserDaoImpl implements UserDao {
         this.em = em;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
 
         TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
@@ -34,13 +39,21 @@ public class UserDaoImpl implements UserDao {
         return query.getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
+    @Transactional(readOnly = true)
     public User getUserById(Long id) {
 
         return em.find(User.class, id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
+    @Transactional(readOnly = true)
     public List<User> getUserByFilter(Long officeId, String firstName, String secondName, String middleName, String position, String docCode, String citizenshipCode) {
         CriteriaQuery<User> criteriaQuery = builderQuery(officeId, firstName, secondName, middleName, position, docCode, citizenshipCode);
 
@@ -86,13 +99,21 @@ public class UserDaoImpl implements UserDao {
         return criteriaQuery;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
+    @Transactional
     public void saveUser(User user) {
 
         em.persist(user);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
+    @Transactional
     public void updateUser(User user) {
         User u = em.find(User.class, user.getId());
 

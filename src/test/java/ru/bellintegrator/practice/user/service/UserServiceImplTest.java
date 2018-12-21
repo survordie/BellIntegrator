@@ -1,41 +1,33 @@
 package ru.bellintegrator.practice.user.service;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.bellintegrator.practice.country.model.Country;
 import ru.bellintegrator.practice.doc.dao.DocDao;
-import ru.bellintegrator.practice.doc.model.Doc;
 import ru.bellintegrator.practice.doc_type.dao.DocTypeDao;
-import ru.bellintegrator.practice.doc_type.model.DocType;
 import ru.bellintegrator.practice.office.dao.OfficeDao;
 import ru.bellintegrator.practice.office.model.Office;
 import ru.bellintegrator.practice.organization.model.Organization;
 import ru.bellintegrator.practice.user.dao.UserDao;
 import ru.bellintegrator.practice.user.model.User;
 import ru.bellintegrator.practice.user.view.UserListView;
-import ru.bellintegrator.practice.user.view.UserView;
 
 import javax.persistence.EntityExistsException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 public class UserServiceImplTest {
 
     private User user;
     private List<User> users;
-    private Doc doc;
-    private DocType docType;
-    private UserView userView;
     private UserListView userListView;
     private List<UserListView> listViews;
     private Office office;
@@ -90,9 +82,9 @@ public class UserServiceImplTest {
                 .when(userDao)
                 .getUserById(1L);
 
-        User u = userDao.getUserById(1L);
+        final User u = userDao.getUserById(1L);
 
-        Assert.assertEquals(u, user);
+        assertEquals(u, user);
     }
 
     @Test
@@ -104,7 +96,7 @@ public class UserServiceImplTest {
 
         List<User> u = userDao.getUserByFilter(1L, "", "", "", "", "", "");
 
-        Assert.assertEquals(u, users);
+        assertEquals(u, users);
     }
 
     @Test(expected = DataIntegrityViolationException.class)

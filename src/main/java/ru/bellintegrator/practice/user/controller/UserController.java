@@ -9,8 +9,6 @@ import ru.bellintegrator.practice.utils.ResultView;
 
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserController {

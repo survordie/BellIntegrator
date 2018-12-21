@@ -5,6 +5,7 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -21,10 +22,12 @@ import ru.bellintegrator.practice.user.view.UserListView;
 import ru.bellintegrator.practice.user.view.UserView;
 import ru.bellintegrator.practice.utils.ResultView;
 
-import javax.persistence.EntityExistsException;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 @Primary
 public class UserServiceImpl implements UserService {
@@ -36,6 +39,7 @@ public class UserServiceImpl implements UserService {
     private final DocTypeDao docTypeDao;
     private final OfficeDao officeDao;
 
+    @Autowired
     public UserServiceImpl(UserDao userDao, DocDao docDao, DocTypeDao docTypeDao, OfficeDao officeDao) {
         this.userDao = userDao;
         this.docDao = docDao;
@@ -43,6 +47,9 @@ public class UserServiceImpl implements UserService {
         this.officeDao = officeDao;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public UserView getUserById(Long id) {
@@ -58,7 +65,9 @@ public class UserServiceImpl implements UserService {
         return userView;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public List<UserListView> getUserList(UserListView userListView) {
@@ -68,7 +77,9 @@ public class UserServiceImpl implements UserService {
         return userListViews;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public ResultView updateUser(UserView userView) {
@@ -92,6 +103,9 @@ public class UserServiceImpl implements UserService {
         return new ResultView();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public ResultView saveUser(UserView userView) {

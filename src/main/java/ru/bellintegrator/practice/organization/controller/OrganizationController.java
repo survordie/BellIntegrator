@@ -21,7 +21,8 @@ public class OrganizationController {
     }
 
     @PostMapping(value = "/list")
-    public @ResponseBody List<OrganizationListView> getOrganizations(@RequestBody OrganizationListView organizationlistview) {
+    public @ResponseBody
+    List<OrganizationListView> getOrganizations(@RequestBody OrganizationListView organizationlistview) {
         return organizationService.getOrganizations(organizationlistview);
     }
 //    public String getOrganizations(@RequestBody String name, String inn, boolean isActive) {

@@ -26,6 +26,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
         this.em = em;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Organization> getAllOrganizations() {
         TypedQuery<Organization> query = em.createQuery("SELECT o FROM Organization o", Organization.class);
@@ -33,12 +36,18 @@ public class OrganizationDaoImpl implements OrganizationDao {
         return query.getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Organization getOrganizationById(Long id) {
 
         return em.find(Organization.class, id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Organization> getOrganizationByFilter(String name, String inn, boolean isActive) {
 

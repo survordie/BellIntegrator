@@ -27,7 +27,10 @@ public interface OfficeDao {
     /**
      * Получить офис по фильтру
      *
-     * @param (orgId,name,phone,isActive)
+     * @param orgId
+     * @param name
+     * @param phone
+     * @param isActive
      * @return
      */
     List<Office> getOfficeByFilter(Long orgId, String name, String phone, boolean isActive);

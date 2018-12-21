@@ -1,6 +1,5 @@
 package ru.bellintegrator.practice.doc_type.service;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.doc_type.view.DocTypeView;
 

@@ -251,7 +251,7 @@
             <plugin>
                 <groupId>com.qulice</groupId>
                 <artifactId>qulice-maven-plugin</artifactId>
-                <version>0.18</version>
+                <version>0.18.5</version>
                 <executions>
                     <execution>
                         <goals>

@@ -1,5 +1,6 @@
 package ru.bellintegrator.practice.country.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,16 +12,23 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 @Primary
 public class CountryServiceImpl implements CountryService {
 
     private final CountryDao countryDao;
 
+    @Autowired
     public CountryServiceImpl(CountryDao countryDao) {
         this.countryDao = countryDao;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public Set<CountryView> getCountries() {

@@ -4,6 +4,9 @@ import ru.bellintegrator.practice.country.view.CountryView;
 
 import java.util.Set;
 
+/**
+ * Сервис для работы со странами
+ */
 public interface CountryService {
 
     /**

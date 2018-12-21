@@ -1,5 +1,6 @@
 package ru.bellintegrator.practice.doc_type.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,22 +8,25 @@ import ru.bellintegrator.practice.doc_type.dao.DocTypeDao;
 import ru.bellintegrator.practice.doc_type.model.DocType;
 import ru.bellintegrator.practice.doc_type.view.DocTypeView;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 @Primary
 public class DocTypeServiceImpl implements DocTypeService {
 
     private final DocTypeDao docTypeDao;
 
-    public DocTypeServiceImpl(DocTypeDao docTypeDao) {
+    @Autowired
+    public DocTypeServiceImpl(DocTypeDao docTypeDao) {this.docTypeDao = docTypeDao;}
 
-        this.docTypeDao = docTypeDao;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public Set<DocTypeView> getDocTypes() {

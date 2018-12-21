@@ -1,7 +1,6 @@
 package ru.bellintegrator.practice.country.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Country")

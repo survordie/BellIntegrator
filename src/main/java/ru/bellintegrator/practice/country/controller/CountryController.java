@@ -1,6 +1,5 @@
 package ru.bellintegrator.practice.country.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +24,8 @@ public class CountryController {
 
     @GetMapping(value = "/countries")
     public Set<CountryView> getCountries() {
+
         return countryService.getCountries();
     }
-//    public String getCountries() throws JsonProcessingException {
-//        return countryService.getCountries();
-//    }
+
 }

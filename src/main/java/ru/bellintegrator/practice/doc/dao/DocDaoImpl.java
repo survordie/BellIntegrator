@@ -57,6 +57,9 @@ public class DocDaoImpl implements DocDao {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Doc getDocumentsByFilter(Long id) {
 //        CriteriaQuery<Doc> criteriaQuery = buildQuery(id);

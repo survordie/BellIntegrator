@@ -5,6 +5,7 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,6 @@ import ru.bellintegrator.practice.organization.view.OrganizationListView;
 import ru.bellintegrator.practice.organization.view.OrganizationView;
 import ru.bellintegrator.practice.utils.ResultView;
 
-import javax.persistence.EntityExistsException;
 import java.util.List;
 
 
@@ -25,12 +25,12 @@ import java.util.List;
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
 
+    private static final String OK = "result\": \"success";
     private final Logger log = LoggerFactory.getLogger(getClass());
-
     private final OrganizationDao organizationDao;
     private final CountryDao countryDao;
-    private static final String OK = "result\": \"success";
 
+    @Autowired
     public OrganizationServiceImpl(OrganizationDao organizationDao, CountryDao countryDao) {
         this.organizationDao = organizationDao;
         this.countryDao = countryDao;
@@ -79,6 +79,9 @@ public class OrganizationServiceImpl implements OrganizationService {
         return new ResultView();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public ResultView updateOrganization(OrganizationView view) {

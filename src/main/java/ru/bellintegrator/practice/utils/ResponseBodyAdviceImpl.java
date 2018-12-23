@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import javax.servlet.http.HttpServletResponse;
 import java.util.LinkedHashMap;
 
-@ControllerAdvice
+@ControllerAdvice("ru.bellintegrator.practice")
 public class ResponseBodyAdviceImpl implements ResponseBodyAdvice<Object> {
 
     @Override

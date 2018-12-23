@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Пользователь
+ */
 @Entity
 @Table(name = "User")
 public class User {

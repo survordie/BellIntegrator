@@ -40,11 +40,16 @@ public class DocTypeDaoImpl implements DocTypeDao {
      */
     @Override
     public DocType getDocTypeByCode(String code) {
-//        return em.find(DocType.class, id);
-        CriteriaQuery<DocType> criteriaQuery = buildQuery(code);
-        TypedQuery<DocType> query = em.createQuery(criteriaQuery);
 
-        DocType docType = query.getSingleResult();
+        final TypedQuery<DocType> query;
+
+        if (code != null) {
+            CriteriaQuery<DocType> criteriaQuery = buildQuery(code);
+            query = em.createQuery(criteriaQuery);
+
+        } else {
+            throw new NullPointerException("Код документа должен быть заполнен");
+        }
         return query.getSingleResult();
     }
 

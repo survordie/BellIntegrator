@@ -40,7 +40,11 @@ public class DocDaoImpl implements DocDao {
     @Override
     public void saveDocument(Doc doc) {
 
-        em.persist(doc);
+        if (doc != null) {
+            em.persist(doc);
+        } else {
+            throw new NullPointerException("Документ не может быть пустым");
+        }
     }
 
     /**
@@ -48,12 +52,17 @@ public class DocDaoImpl implements DocDao {
      */
     @Override
     public void updateDocument(Doc doc) {
-        Doc d = em.find(Doc.class, doc.getId());
 
-        if (d != null) {
-            d.setDocNumber(doc.getDocNumber());
-            d.setDocCode(doc.getDocCode());
-            d.setDocDate(doc.getDocDate());
+        if (doc != null) {
+            Doc d = em.find(Doc.class, doc.getId());
+
+            if (d != null) {
+                d.setDocNumber(doc.getDocNumber());
+                d.setDocCode(doc.getDocCode());
+                d.setDocDate(doc.getDocDate());
+            }
+        } else {
+            throw new NullPointerException("Документ не может быть пустым");
         }
     }
 
@@ -62,11 +71,11 @@ public class DocDaoImpl implements DocDao {
      */
     @Override
     public Doc getDocumentsByFilter(Long id) {
-//        CriteriaQuery<Doc> criteriaQuery = buildQuery(id);
-//        TypedQuery<Doc> query = em.createQuery(criteriaQuery);
-
-//        return query.getResultList();
+        if (id != 0) {
         return em.find(Doc.class, id);
+        } else {
+            throw new IllegalArgumentException("Идентификатор документа не может быть равным нулю");
+        }
     }
 
     private CriteriaQuery<Doc> buildQuery(Long id) {

@@ -2,6 +2,9 @@ package ru.bellintegrator.practice.country.model;
 
 import javax.persistence.*;
 
+/**
+ * Страна
+ */
 @Entity
 @Table(name = "Country")
 public class Country {

@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * Документ
+ */
 @Entity
 @Table(name = "Doc")
 public class Doc {

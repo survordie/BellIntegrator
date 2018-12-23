@@ -79,12 +79,18 @@ public class OrganizationDaoImpl implements OrganizationDao {
         return criteriaQuery;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveOrganization(Organization organization) {
 
         em.persist(organization);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateOrganization(Organization organization) {
 

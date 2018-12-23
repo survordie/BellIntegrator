@@ -41,8 +41,14 @@ public class CountryDaoImpl implements CountryDao {
     @Override
     public Country getCountryByCode(String code) {
 
-        CriteriaQuery<Country> criteria = buildCriteria(code);
-        TypedQuery<Country> query = em.createQuery(criteria);
+        final TypedQuery<Country> query;
+
+        if (code != null) {
+            CriteriaQuery<Country> criteria = buildCriteria(code);
+            query = em.createQuery(criteria);
+        } else {
+            throw new NullPointerException("Код страны не может быть равным нулю");
+        }
 
         return query.getSingleResult();
     }

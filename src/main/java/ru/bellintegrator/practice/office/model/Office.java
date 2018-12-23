@@ -4,6 +4,9 @@ import ru.bellintegrator.practice.organization.model.Organization;
 
 import javax.persistence.*;
 
+/**
+ * Офис
+ */
 @Entity
 @Table(name = "Office")
 public class Office {

@@ -2,6 +2,9 @@ package ru.bellintegrator.practice.doc_type.model;
 
 import javax.persistence.*;
 
+/**
+ * Тип документа
+ */
 @Entity
 @Table(name = "Doc_Type")
 public class DocType {

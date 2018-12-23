@@ -12,7 +12,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class PingController {
 
     @RequestMapping(value = "/ping", method = {GET, POST})
-    public String ping() {
-        return "pong";
+    public char[] ping() {
+        return "pong".toCharArray();
     }
 }

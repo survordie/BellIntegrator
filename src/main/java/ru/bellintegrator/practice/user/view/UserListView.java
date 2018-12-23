@@ -1,10 +1,12 @@
 package ru.bellintegrator.practice.user.view;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserListView {
 
+    @ApiModelProperty(hidden = true)
     public Long id;
     public Long officeId;
     public String firstName;

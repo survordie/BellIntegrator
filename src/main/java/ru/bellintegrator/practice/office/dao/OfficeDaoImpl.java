@@ -50,9 +50,14 @@ public class OfficeDaoImpl implements OfficeDao {
      */
     @Override
     public List<Office> getOfficeByFilter(Long orgId, String name, String phone, boolean isActive) {
-        CriteriaQuery<Office> criteriaQuery = buildQuery(orgId, name, phone, isActive);
 
-        TypedQuery<Office> query = em.createQuery(criteriaQuery);
+        final TypedQuery<Office> query;
+        if (orgId != 0) {
+            CriteriaQuery<Office> criteriaQuery = buildQuery(orgId, name, phone, isActive);
+            query = em.createQuery(criteriaQuery);
+        } else {
+            throw new NullPointerException("Идентификатор организации должен быть указан");
+        }
 
         return query.getResultList();
     }
@@ -82,11 +87,17 @@ public class OfficeDaoImpl implements OfficeDao {
         return criteriaQuery;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveOffice(Office office) {
         em.persist(office);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateOffice(Office office) {
         Office of = em.find(Office.class, office.getId());
@@ -98,7 +109,7 @@ public class OfficeDaoImpl implements OfficeDao {
             of.setPhone(office.getPhone());
             of.setIsActive(office.getIsActive());
         } else {
-            throw new IllegalArgumentException("office for update not found!");
+            throw new NullPointerException("office for update not found!");
         }
         em.flush();
     }

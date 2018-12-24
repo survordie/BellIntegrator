@@ -15,7 +15,7 @@ import java.util.Set;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@Api(value = "/api", description = "Операции с профилем")
+@Api(value = "/api", description = "Операции с данными по странам")
 @RestController
 @RequestMapping(value = "/api", produces = APPLICATION_JSON_VALUE)
 public class CountryController {
